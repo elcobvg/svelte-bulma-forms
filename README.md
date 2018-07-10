@@ -1,5 +1,6 @@
 # svelte-bulma-forms
 Bulma form componenents for [Svelte](https://svelte.technology/)
+
 **Note:** this is still a work in progress
 
 ### TODO
@@ -24,9 +25,9 @@ import {
 
 export default {
   components: {
-	TextField,
-	DateField,
-	EmailField,
+    TextField,
+    DateField,
+    EmailField,
 	...
   }
 }
