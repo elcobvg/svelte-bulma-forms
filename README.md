@@ -4,7 +4,7 @@ Bulma form componenents for [Svelte](https://svelte.technology/)
 **Note:** this is still a work in progress
 
 ### TODO
-- [ ] Remaining form elements
+- [x] Remaining form elements
 - [ ] Input validation for all elements
 - [ ] Consistent event handling
 
@@ -32,7 +32,19 @@ export default {
   }
 }
 ````
+And then use them like so:
 
+````javascript
+<TextField name="name" label="Name" horizontal />
+
+<CheckboxGroup horizontal>
+  <CheckboxControl name="agree" required>
+    I agree to the <a href="#">terms and conditions</a>
+  </CheckboxControl>
+</CheckboxGroup>
+
+<ButtonField state="info" type="submit" horizontal />
+````
 **Don't forget to include the Bulma CSS files!**
 
 ## Options

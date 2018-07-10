@@ -31,16 +31,17 @@ import uuid from 'random-uuid-v4'
 
 export default {
   components: {
-    FieldLabel: '../fields/FieldLabel.html',
+    FieldLabel: '../fields/FieldLabel.html'
   },
   computed: {
-    id: ({ name }) => `${name.toLowerCase()}${uuid()}`,
+    id: ({ name }) => `${name.toLowerCase()}${uuid()}`
   },
   data () {
     return {
       name: '',
       label: '',
       size: '',
+      horizontal: false,
       required: null
     }
   }

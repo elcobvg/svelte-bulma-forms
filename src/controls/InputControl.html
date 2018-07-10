@@ -27,7 +27,7 @@
 export default {
   computed: {
     stateClass: ({ state }) => state ? ` is-${state}` : '',
-    sizeClass: ({ size }) => size ? ` is-${size}` : '',
+    sizeClass: ({ size }) => size ? ` is-${size}` : ''
   },
   data () {
     return {
@@ -41,7 +41,7 @@ export default {
       state: null,
       size: null,
       required: false,
-      disabled: false,
+      disabled: false
     }
   }
 }

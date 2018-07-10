@@ -19,7 +19,7 @@
 </InputField>
 
 <script>
-import { email } from '../validation/rules'
+import { validate, email } from '../validation'
 
 export default {
   components: {
@@ -40,27 +40,14 @@ export default {
       required: false,
       disabled: false,
       validation: email,
-      value: null,
+      value: null
     }
   },
   methods: {
-    changeValue (email) {
-      this.set({ iconRight: null })
-      const { validation } = this.get()
-      if (validation.rule.test(email)) {
-        this.set({
-          help: '',
-          state: 'success',
-          iconRight: 'fas fa-check'
-        })
-        this.fire('change', email)
-        return
+    changeValue (input) {
+      if (validate(this, input)) {
+        this.fire('change', input)
       }
-      this.set({
-        help: validation.message,
-        state: 'danger',
-        iconRight: 'fas fa-exclamation-triangle'
-      })
     }
   },
   onstate ({ previous }) {

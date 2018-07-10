@@ -1,6 +1,9 @@
 <label class="checkbox">
-  <input type="checkbox" name="{name}">
+  <input type="checkbox" name="{name}" {value} {required} on:change="changeValue(event)" ref:checkbox>
   <slot><!-- checkbox label goes here --></slot>
+{#if required}
+  <span class="has-text-danger"> *</span>
+{/if}
 </label>
 
 <script>
@@ -8,9 +11,15 @@ export default {
   data () {
     return {
       name: '',
+      value: null,
+      required: false
     }
   },
   methods: {
+    changeValue (event) {
+      const { checkbox } = this.refs
+      this.fire('change', checkbox.checked)
+    }
   }
 }
 </script>

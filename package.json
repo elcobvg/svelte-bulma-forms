@@ -14,18 +14,23 @@
   "homepage": "https://github.com/elcobvg/svelte-bulma-forms#readme",
   "dependencies": {
     "bulma": "^0.7.1",
+    "font-awesome": "^4.7.0",
     "random-uuid-v4": "^0.0.7"
   },
   "devDependencies": {
+    "eslint": "^5.1.0",
+    "eslint-plugin-html": "^4.0.5",
     "rollup": "^0.62.0",
     "rollup-plugin-commonjs": "^9.1.3",
     "rollup-plugin-node-resolve": "^3.3.0",
     "rollup-plugin-svelte": "^4.2.1",
+    "standard": "^11.0.1",
     "svelte": "^2.9.1"
   },
   "main": "dist/index.js",
   "module": "module.js",
   "scripts": {
+    "lint": "standard --plugin html --ext .js,.html src/**/* --fix",
     "dist": "rollup -c",
     "prepublish": "npm run dist"
   },

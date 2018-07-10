@@ -91,7 +91,7 @@ export default {
   },
   computed: {
     id: ({ name }) => `${name.toLowerCase()}${uuid()}`,
-    stateClass: ({ state }) => state ? ` is-${state}` : '',
+    stateClass: ({ state }) => state ? ` is-${state}` : ''
   },
   methods: {
     changeValue (event) {

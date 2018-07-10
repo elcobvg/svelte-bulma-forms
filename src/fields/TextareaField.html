@@ -47,6 +47,7 @@
 
 <script>
 import uuid from 'random-uuid-v4'
+import { validate, required } from '../validation'
 
 export default {
   components: {
@@ -55,7 +56,7 @@ export default {
   },
   computed: {
     id: ({ name }) => `${name.toLowerCase()}${uuid()}`,
-    stateClass: ({ state }) => state ? ` is-${state}` : '',
+    stateClass: ({ state }) => state ? ` is-${state}` : ''
   },
   data () {
     return {
@@ -70,12 +71,16 @@ export default {
       size: null,
       required: false,
       rows: null,
+      validation: required
     }
   },
   methods: {
     changeValue (event) {
       const { value } = event.target
-      this.fire('change', value)
+      const { required } = this.get()
+      if (!required || validate(this, value)) {
+        this.fire('change', value)
+      }
     }
   }
 }
