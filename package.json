@@ -7,13 +7,14 @@
     "url": "git+https://github.com/elcobvg/svelte-bulma-forms.git"
   },
   "author": "Elco Brouwer von Gonzenbach <elco.brouwer@gmail.com>",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/elcobvg/svelte-bulma-forms/issues"
   },
   "homepage": "https://github.com/elcobvg/svelte-bulma-forms#readme",
   "dependencies": {
-    "bulma": "^0.7.1"
+    "bulma": "^0.7.1",
+    "random-uuid-v4": "^0.0.7"
   },
   "devDependencies": {
     "rollup": "^0.62.0",
@@ -22,6 +23,8 @@
     "rollup-plugin-svelte": "^4.2.1",
     "svelte": "^2.9.1"
   },
+  "main": "dist/index.js",
+  "module": "module.js",
   "scripts": {
     "dist": "rollup -c",
     "prepublish": "npm run dist"

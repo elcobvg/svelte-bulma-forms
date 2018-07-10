@@ -3,7 +3,7 @@ import resolve from 'rollup-plugin-node-resolve';
 import svelte from 'rollup-plugin-svelte';
 
 export default {
-  entry: 'SvelteBulmaForms.js',
+  entry: 'src/index.js',
   dest: 'dist/index.js',
   format: 'cjs',
   plugins: [
@@ -13,7 +13,7 @@ export default {
     }),
     commonjs(),
     svelte({
-      include: '/**/*.html'
+      include: 'src/**/*.html'
     })
   ]
 }
