@@ -5,7 +5,7 @@ Bulma form componenents for [Svelte](https://svelte.technology/)
 
 ### TODO
 - [x] Remaining form elements
-- [ ] Input validation for all elements
+- [x] Input validation for all elements
 - [ ] Consistent event handling
 
 ## Install
@@ -34,7 +34,7 @@ export default {
 ````
 And then use them like so:
 
-````javascript
+````html
 <TextField name="name" label="Name" horizontal />
 
 <CheckboxGroup horizontal>
