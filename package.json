@@ -1,0 +1,35 @@
+{
+  "name": "svelte-bulma-forms",
+  "description": "svelte-bulma-forms",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elcobvg/svelte-bulma-forms.git"
+  },
+  "author": "Elco Brouwer von Gonzenbach <elco.brouwer@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/elcobvg/svelte-bulma-forms/issues"
+  },
+  "homepage": "https://github.com/elcobvg/svelte-bulma-forms#readme",
+  "dependencies": {
+    "bulma": "^0.7.1"
+  },
+  "devDependencies": {
+    "rollup": "^0.62.0",
+    "rollup-plugin-commonjs": "^9.1.3",
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-svelte": "^4.2.1",
+    "svelte": "^2.9.1"
+  },
+  "scripts": {
+    "dist": "rollup -c",
+    "prepublish": "npm run dist"
+  },
+  "keywords": [
+    "javascript",
+    "svelte",
+    "bulma",
+    "form"
+  ]
+}

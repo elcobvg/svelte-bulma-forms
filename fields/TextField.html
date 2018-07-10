@@ -1,0 +1,54 @@
+<InputField 
+  type="text"
+  {name}
+  {placeholder}
+  {help}
+  {iconLeft}
+  {iconRight}
+  {addOn}
+  {horizontal}
+  {label}
+  {state}
+  {size}
+  {required}
+  {disabled}
+  {value}
+  on:change="changeValue(event)"
+>
+  <slot><!-- addon is injected here --></slot>
+</InputField>
+
+<script>
+export default {
+  components: {
+    InputField: './InputField.html'
+  },
+  data () {
+    return {
+      name: '',
+      placeholder: '',
+      help: '',
+      iconLeft: null,
+      iconRight: null,
+      addOn: null,
+      horizontal: null,
+      label: '',
+      state: null,
+      size: null,
+      required: false,
+      disabled: false,
+      value: '',
+    }
+  },
+  methods: {
+    changeValue (input) {
+      this.fire('change', input)
+    }
+  },
+  onstate ({ previous }) {
+    if (Object.entries(this._slotted).length && !previous) {
+      this.set({ addOn: true })
+    }
+  }
+}
+</script>

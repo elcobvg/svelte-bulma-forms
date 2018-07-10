@@ -1,0 +1,130 @@
+{#if horizontal}
+<div class="field is-horizontal{addOn ? ' has-addons' : ''}">
+  <div class="field-label is-normal">
+{#if label}
+    <FieldLabel {id} {size} {required} {label} />
+{/if}
+  </div>
+  <div class="field-body">
+    <div class="field">
+{#if multiple}
+      <MultiSelectControl 
+        {name}
+        {id}
+        {state}
+        {size}
+        {required}
+        {disabled}
+        {value}
+        bind:value="value"
+        on:change="fire('change', value)"
+      >
+        <slot><!-- options are injected here --></slot>
+      </MultiSelectControl>
+{:else}
+      <SelectControl 
+        {name}
+        {id}
+        {iconLeft}
+        {state}
+        {size}
+        {required}
+        {disabled}
+        {value}
+        bind:value="value"
+        on:change="fire('change', value)"
+      >
+        <slot><!-- options are injected here --></slot>
+      </SelectControl>
+{/if}
+{#if addOn}
+      <slot name="addOn"><!-- addon is injected here --></slot>
+{/if}
+{#if help}
+      <p class="help{stateClass}">{help}</p>
+{/if}
+    </div>
+  </div>
+</div>
+
+{:else}
+<div class="field{addOn ? ' has-addons' : ''}">
+{#if label}
+  <FieldLabel {id} {size} {required} {label} />
+{/if}
+{#if multiple}
+  <MultiSelectControl 
+    {name}
+    {id}
+    {state}
+    {size}
+    {required}
+    {disabled}
+    {value}
+    bind:value="value"
+    on:change="fire('change', value)"
+  >
+    <slot><!-- options are injected here --></slot>
+  </MultiSelectControl>
+{:else}
+  <SelectControl 
+    {name}
+    {id}
+    {iconLeft}
+    {state}
+    {size}
+    {required}
+    {disabled}
+    {value}
+    bind:value="value"
+    on:change="fire('change', value)"
+  >
+    <slot><!-- options are injected here --></slot>
+  </SelectControl>
+{/if}
+{#if addOn}
+  <slot name="addOn"><!-- addon is injected here --></slot>
+{/if}
+{#if help}
+  <p class="help{stateClass}">{help}</p>
+{/if}
+</div>
+{/if}
+
+<script>
+import uuid from 'random-uuid-v4'
+
+export default {
+  components: {
+    FieldLabel: './FieldLabel.html',
+    SelectControl: '../controls/SelectControl.html',
+    MultiSelectControl: '../controls/MultiSelectControl.html'
+  },
+  computed: {
+    id: ({ name }) => `${name.toLowerCase()}${uuid()}`,
+    stateClass: ({ state }) => state ? ` is-${state}` : '',
+  },
+  data () {
+    return {
+      name: '',
+      value: null,
+      help: '',
+      iconLeft: null,
+      addOn: null,
+      horizontal: null,
+      label: '',
+      state: null,
+      size: null,
+      required: false,
+      disabled: false,
+      value: null,
+      multiple: false,
+    }
+  },
+  onstate ({ previous }) {
+    if (Object.entries(this._slotted).length && !previous) {
+      this.set({ addOn: true })
+    }
+  }
+}
+</script>

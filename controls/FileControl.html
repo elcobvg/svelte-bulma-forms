@@ -1,0 +1,46 @@
+{#if file}
+<div class="file has-name{sizeClass}{stateClass}{right ? ' is-right' : ''}">
+  <label class="file-label">
+    <input class="file-input" {id} type="file" {name}>
+    <span class="file-cta">
+      <span class="file-icon">
+        <i class="fas fa-upload"></i>
+      </span>
+      <span class="file-label">{label}</span>
+    </span>
+    <span class="file-name">{file}</span>
+  </label>
+</div>
+{:else}
+<div class="file{sizeClass}{stateClass}">
+  <label class="file-label">
+    <input class="file-input" {id} type="file" {name}>
+    <span class="file-cta">
+      <span class="file-icon">
+        <i class="fas fa-upload"></i>
+      </span>
+      <span class="file-label">{label}</span>
+    </span>
+  </label>
+</div>
+{/if}
+
+<script>
+export default {
+  computed: {
+    sizeClass: ({ size }) => size ? ` is-${size}` : '',
+    stateClass: ({ state }) => state ? ` is-${state}` : '',
+  },
+  data () {
+    return {
+      id: '',
+      name: '',
+      label: '',
+      file: '',
+      right: false,
+      size: '',
+      state: '',
+    }
+  }
+}
+</script>

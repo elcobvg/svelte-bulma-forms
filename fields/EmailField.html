@@ -1,0 +1,72 @@
+<InputField 
+  type="email"
+  {name}
+  {placeholder}
+  {help}
+  {iconLeft}
+  {iconRight}
+  {addOn}
+  {horizontal}
+  {label}
+  {state}
+  {size}
+  {required}
+  {disabled}
+  {value}
+  on:change="changeValue(event)"
+>
+  <slot><!-- addon is injected here --></slot>
+</InputField>
+
+<script>
+import { email } from '../validation/rules'
+
+export default {
+  components: {
+    InputField: './InputField.html'
+  },
+  data () {
+    return {
+      name: '',
+      placeholder: 'Email address',
+      help: '',
+      iconLeft: 'fas fa-envelope',
+      iconRight: null,
+      addOn: null,
+      horizontal: null,
+      label: '',
+      state: null,
+      size: null,
+      required: false,
+      disabled: false,
+      validation: email,
+      value: null,
+    }
+  },
+  methods: {
+    changeValue (email) {
+      this.set({ iconRight: null })
+      const { validation } = this.get()
+      if (validation.rule.test(email)) {
+        this.set({
+          help: '',
+          state: 'success',
+          iconRight: 'fas fa-check'
+        })
+        this.fire('change', email)
+        return
+      }
+      this.set({
+        help: validation.message,
+        state: 'danger',
+        iconRight: 'fas fa-exclamation-triangle'
+      })
+    }
+  },
+  onstate ({ previous }) {
+    if (Object.entries(this._slotted).length && !previous) {
+      this.set({ addOn: true })
+    }
+  }
+}
+</script>

@@ -1,0 +1,58 @@
+{#if horizontal}
+<div class="field is-horizontal">
+  <div class="field-label">
+{#if label}
+    <FieldLabel {id} {size} {required} {label} />
+{/if}
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <div class="control">
+        <slot><!-- checkbox controls go here --></slot>
+      </div>
+    </div>
+  </div>
+</div>
+
+{:elseif label}
+<div class="field">
+  <div class="field-label">
+    <FieldLabel {id} {size} {required} {label} />
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <div class="control">
+        <slot><!-- checkbox controls go here --></slot>
+      </div>
+    </div>
+  </div>
+</div>
+
+{:else}
+<div class="field">
+  <div class="control">
+    <slot><!-- checkbox controls go here --></slot>
+  </div>
+</div>
+{/if}
+
+<script>
+import uuid from 'random-uuid-v4'
+
+export default {
+  components: {
+    FieldLabel: '../fields/FieldLabel.html',
+  },
+  computed: {
+    id: ({ name }) => `${name.toLowerCase()}${uuid()}`,
+  },
+  data () {
+    return {
+      name: '',
+      label: '',
+      size: '',
+      required: null
+    }
+  }
+}
+</script>

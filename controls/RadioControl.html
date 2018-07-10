@@ -1,0 +1,15 @@
+<label class="radio">
+  <input type="radio" name="{name}" {value} bind:value="value" on:change="fire('change', value)">
+  <slot><!-- checkbox label goes here --></slot>
+</label>
+
+<script>
+export default {
+  data () {
+    return {
+      name: '',
+      value: '',
+    }
+  }
+}
+</script>

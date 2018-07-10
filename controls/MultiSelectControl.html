@@ -1,0 +1,26 @@
+<div class="control">
+  <div class="select is-multiple{stateClass}{sizeClass}">
+    <select {name} {id} {disabled} multiple bind:value="value" on:change="fire('change', value)">
+      <slot><!-- options are injected here --></slot>
+    </select>
+  </div>
+</div>
+
+<script>
+export default {
+  computed: {
+    stateClass: ({ state }) => state ? ` is-${state}` : '',
+    sizeClass: ({ size }) => size ? ` is-${size}` : '',
+  },
+  data () {
+    return {
+      name: '',
+      value: null,
+      options: [],
+      state: '',
+      size: '',
+      disabled: false,
+    }
+  }
+}
+</script>

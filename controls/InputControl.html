@@ -1,0 +1,48 @@
+<div class="control{iconLeft ? ' has-icons-left' : ''}{iconRight ? ' has-icons-right' : ''}">
+  <input 
+    class="input{stateClass}{sizeClass}" 
+    {type} 
+    {name}
+    {id}
+    {placeholder}
+    {required}
+    {disabled}
+    {value}
+    autocomplete="{placeholder}" 
+    on:change="fire('change', event)"
+  >
+{#if iconLeft}
+  <span class="icon is-small is-left">
+    <i class="{iconLeft}"></i>
+  </span>
+{/if}
+{#if iconRight}
+  <span class="icon is-small is-right">
+    <i class="{iconRight}"></i>
+  </span>
+{/if}
+</div>
+
+<script>
+export default {
+  computed: {
+    stateClass: ({ state }) => state ? ` is-${state}` : '',
+    sizeClass: ({ size }) => size ? ` is-${size}` : '',
+  },
+  data () {
+    return {
+      type: 'text',
+      id: '',
+      name: '',
+      value: null,
+      placeholder: '',
+      iconLeft: null,
+      iconRight: null,
+      state: null,
+      size: null,
+      required: false,
+      disabled: false,
+    }
+  }
+}
+</script>

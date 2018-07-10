@@ -1,0 +1,103 @@
+{#if horizontal}
+<div class="field  is-horizontal{addOn ? ' has-addons' : ''}">
+  <div class="field-label is-normal">
+{#if label}
+    <FieldLabel {id} {size} {required} {label} />
+{/if}
+  </div>
+{#if addOn}
+  <div class="field-body">
+    <div class="field is-expanded">
+      <div class="field has-addons">
+        <InputControl 
+          {type}
+          {name}
+          {id}
+          {placeholder}
+          {iconLeft}
+          {iconRight}
+          {state}
+          {size}
+          {required}
+          {disabled}
+          {value}
+          on:change="changeValue(event)"
+        />
+        <slot><!-- addon is injected here --></slot>
+      </div>
+{#if help}
+      <p class="help{stateClass}">{help}</p>
+{/if}
+    </div>
+  </div>
+{:else}
+  <div class="field-body">
+    <div class="field">
+      <InputControl 
+        {type}
+        {name}
+        {id}
+        {placeholder}
+        {iconLeft}
+        {iconRight}
+        {state}
+        {size}
+        {required}
+        {disabled}
+        {value}
+        on:change="changeValue(event)"
+      />
+{#if help}
+      <p class="help{stateClass}">{help}</p>
+{/if}
+    </div>
+  </div>
+{/if}
+</div>
+
+{:else}
+<div class="field{addOn ? ' has-addons' : ''}">
+{#if label}
+  <FieldLabel {id} {size} {required} {label} />
+{/if}
+  <InputControl 
+    {type}
+    {name}
+    {id}
+    {placeholder}
+    {iconLeft}
+    {iconRight}
+    {state}
+    {size}
+    {required}
+    {disabled}
+    {value}
+    on:change="changeValue(event)"
+  />
+  <slot><!-- addon is injected here --></slot>
+{#if help}
+  <p class="help{stateClass}">{help}</p>
+{/if}
+</div>
+{/if}
+
+<script>
+import uuid from 'random-uuid-v4'
+
+export default {
+  components: {
+    FieldLabel: './FieldLabel.html',
+    InputControl: '../controls/InputControl.html'
+  },
+  computed: {
+    id: ({ name }) => `${name.toLowerCase()}${uuid()}`,
+    stateClass: ({ state }) => state ? ` is-${state}` : '',
+  },
+  methods: {
+    changeValue (event) {
+      const { value } = event.target
+      this.fire('change', value)
+    }
+  }
+}
+</script>

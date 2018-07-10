@@ -1,0 +1,71 @@
+{#if horizontal}
+<div class="field is-horizontal{addOn ? ' has-addons' : ''}">
+  <div class="field-label is-normal">
+{#if label}
+    <FieldLabel {id} {size} {label} />
+{/if}
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <ButtonControl 
+        {type}
+        {name}
+        {id}
+        {state}
+        {size}
+        on:click="buttonClick(event)"
+      />
+{#if addOn}
+      <slot><!-- addon is injected here --></slot>
+{/if}
+    </div>
+  </div>
+</div>
+
+{:else}
+<div class="field{addOn ? ' has-addons' : ''}">
+{#if label}
+  <FieldLabel {id} {size} {label} />
+{/if}
+  <ButtonControl 
+    {type}
+    {name}
+    {id}
+    {state}
+    {size}
+    on:click="buttonClick(event)"
+  />
+{#if addOn}
+  <slot><!-- addon is injected here --></slot>
+{/if}
+</div>
+{/if}
+
+<script>
+import uuid from 'random-uuid-v4'
+
+export default {
+  components: {
+    FieldLabel: './FieldLabel.html',
+    ButtonControl: '../controls/ButtonControl.html'
+  },
+  computed: {
+    id: ({ name }) => `${name.toLowerCase()}${uuid()}`,
+  },
+  data () {
+    return {
+      label: '',
+      addOn: null,
+      type: 'button',
+      name: 'Submit',
+      state: 'primary',
+      size: null
+    }
+  },
+  methods: {
+    buttonClick (event) {
+      this.fire('click', event)
+    }
+  }
+}
+</script>

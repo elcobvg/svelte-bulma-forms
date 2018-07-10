@@ -1,0 +1,28 @@
+<label class="label{sizeClass}" for="{id}">
+  <span>{label}</span> 
+{#if required}
+  <span class="has-text-danger"> *</span>
+{/if} 
+</label>
+
+<script>
+export default {
+  computed: {
+    sizeClass: ({ size }) => size ? ` is-${size}` : '',
+  },
+  data () {
+    return {
+      id: '',
+      label: '',
+      size: '',
+      required: false
+    }
+  }
+}
+</script>
+
+<style>
+.has-text-danger {
+  margin-right: -0.75rem;
+}
+</style>

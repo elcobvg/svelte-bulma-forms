@@ -1,0 +1,82 @@
+{#if horizontal}
+<div class="field is-horizontal">
+  <div class="field-label is-normal">
+{#if label}
+    <FieldLabel {id} {size} {required} {label} />
+{/if}
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <TextareaControl 
+        {name}
+        {id}
+        {placeholder}
+        {state}
+        {size}
+        {rows}
+        bind:value="value"
+        on:change="fire('change', value)"
+      />
+{#if help}
+      <p class="help{stateClass}">{help}</p>
+{/if}
+    </div>
+  </div>
+</div>
+
+{:else}
+<div class="field">
+{#if label}
+  <FieldLabel {id} {size} {required} {label} />
+{/if}
+  <TextareaControl 
+    {name}
+    {id}
+    {placeholder}
+    {state}
+    {size}
+    {rows}
+    bind:value="value"
+    on:change="fire('change', value)"
+  />
+{#if help}
+  <p class="help{stateClass}">{help}</p>
+{/if}
+</div>
+{/if}
+
+<script>
+import uuid from 'random-uuid-v4'
+
+export default {
+  components: {
+    FieldLabel: './FieldLabel.html',
+    TextareaControl: '../controls/TextareaControl.html'
+  },
+  computed: {
+    id: ({ name }) => `${name.toLowerCase()}${uuid()}`,
+    stateClass: ({ state }) => state ? ` is-${state}` : '',
+  },
+  data () {
+    return {
+      type: 'text',
+      name: '',
+      value: null,
+      placeholder: '',
+      help: '',
+      horizontal: null,
+      label: '',
+      state: null,
+      size: null,
+      required: false,
+      rows: null,
+    }
+  },
+  methods: {
+    changeValue (event) {
+      const { value } = event.target
+      this.fire('change', value)
+    }
+  }
+}
+</script>

@@ -1,0 +1,29 @@
+<div class="control">
+  <textarea 
+    class="textarea{stateClass}{sizeClass}" 
+    {name} 
+    {id}
+    {placeholder}
+    rows="{rows || 5}"
+    bind:value="value"
+    on:change="fire('change', value)"
+  />
+</div>
+
+<script>
+export default {
+  computed: {
+    stateClass: ({ state }) => state ? ` is-${state}` : '',
+    sizeClass: ({ size }) => size ? ` is-${size}` : '',
+  },
+  data () {
+    return {
+      name: '',
+      placeholder: '',
+      state: '',
+      size: '',
+      rows: null
+    }
+  }
+}
+</script>
