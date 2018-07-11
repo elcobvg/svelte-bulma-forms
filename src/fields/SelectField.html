@@ -137,3 +137,30 @@ export default {
   }
 }
 </script>
+
+<style>
+
+/* Correct label position with addons in vertical layout */
+.field.has-addons {
+  display: block;
+}
+
+.field.is-horizontal.has-addons,
+.field.has-addons .has-addons {
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* Correct label position with addons on mobile horizontal */
+@media screen and (max-width: 768px) {
+  .field.is-horizontal.has-addons {
+    display: block;
+  }
+
+  .field.is-horizontal.has-addons .field.has-addons {
+    display: flex;
+    justify-content: flex-start;
+  }
+}
+
+</style>

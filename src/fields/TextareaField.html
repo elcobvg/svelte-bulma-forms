@@ -15,7 +15,7 @@
         {size}
         {rows}
         bind:value="value"
-        on:change="fire('change', value)"
+        on:change="changeValue(event)"
       />
 {#if help}
       <p class="help{stateClass}">{help}</p>
@@ -37,7 +37,7 @@
     {size}
     {rows}
     bind:value="value"
-    on:change="fire('change', value)"
+    on:change="changeValue(event)"
   />
 {#if help}
   <p class="help{stateClass}">{help}</p>
@@ -75,8 +75,7 @@ export default {
     }
   },
   methods: {
-    changeValue (event) {
-      const { value } = event.target
+    changeValue (value) {
       const { required } = this.get()
       if (!required || validate(this, value)) {
         this.fire('change', value)
