@@ -23,7 +23,7 @@ import {
   TextField,
   DateField,
   EmailField
-} from 'svelte-bulma-forms'
+} from 'svelte-bulma-forms/module'
 
 export default {
   components: {
@@ -73,4 +73,24 @@ Where `passwordValidator` is a plain JavaScript object with two possible propert
 The custom validator is merged with the default settings, so you can only provide a `message` and keep the default `rule`, for instance.
 
 ## Made with Svelte
-It's made with [Svelte](https://svelte.technology/), which means you don't need any JS framework. Just use the file in the `dist` directory in any Javascript project.
+It's made with [Svelte](https://svelte.technology/), which means you don't need any JS framework. Just use the file in the `dist` directory in any Javascript project:
+
+**include the bundle:** 
+
+````html
+<script src="svelte-bulma-forms/dist/index.js"></script>
+````
+**create components like so:**
+
+````javascript
+const { EmailField } = SvelteBulmaForms
+
+const emailInput = new EmailField({
+  target: document.querySelector('#email'),
+  data: { 
+    name: 'email',
+    label: 'Email address',
+    horizontal: true
+  }
+})
+````

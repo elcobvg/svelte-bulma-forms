@@ -3,9 +3,12 @@ import resolve from 'rollup-plugin-node-resolve';
 import svelte from 'rollup-plugin-svelte';
 
 export default {
-  entry: 'src/index.js',
-  dest: 'dist/index.js',
-  format: 'cjs',
+  input: 'src/index.js',
+  output: {
+    file: 'dist/index.js',
+    format: 'iife',
+    name: 'SvelteBulmaForms'
+  },
   plugins: [
     resolve({
       jsnext: true,
