@@ -1,6 +1,6 @@
 <div class="control{iconLeft ? ' has-icons-left' : ''}{iconRight ? ' has-icons-right' : ''}">
   <input 
-    class="input{stateClass}{sizeClass}" 
+    class="input{stateClass}{sizeClass}{rounded ? ' is-rounded' : ''}" 
     {type} 
     {name}
     {id}
@@ -8,6 +8,7 @@
     {required}
     {disabled}
     {value}
+    {readonly}
     autocomplete="{placeholder}" 
     on:change="fire('change', event)"
   >
@@ -41,7 +42,8 @@ export default {
       state: null,
       size: null,
       required: false,
-      disabled: false
+      disabled: false,
+      readonly: false,
     }
   }
 }

@@ -13,6 +13,8 @@
   {required}
   {disabled}
   {value}
+  {rounded}
+  {readonly}
   on:change="changeValue(event)"
 >
   <slot><!-- addon is injected here --></slot>
@@ -33,12 +35,14 @@ export default {
       iconLeft: 'fa fa-calendar',
       iconRight: null,
       addOn: null,
-      horizontal: null,
+      horizontal: false,
       label: '',
       state: null,
       size: null,
       required: false,
       disabled: false,
+      rounded: false,
+      readonly: false,
       value: null,
       validation: required
     }

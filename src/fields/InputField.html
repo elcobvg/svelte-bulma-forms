@@ -21,6 +21,8 @@
           {required}
           {disabled}
           {value}
+          {rounded}
+          {readonly}
           on:change="changeValue(event)"
         />
         <slot><!-- addon is injected here --></slot>
@@ -45,6 +47,8 @@
         {required}
         {disabled}
         {value}
+        {rounded}
+        {readonly}
         on:change="changeValue(event)"
       />
 {#if help}
@@ -73,6 +77,8 @@
       {required}
       {disabled}
       {value}
+      {rounded}
+      {readonly}
       on:change="changeValue(event)"
     />
     <slot><!-- addon is injected here --></slot>
