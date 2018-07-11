@@ -1,14 +1,17 @@
 # svelte-bulma-forms
 Bulma form components for [Svelte.js](https://svelte.technology/)
 
-**Note:** this is still a work in progress
+These components offer a convenient way to build HTML forms, either in **Svelte** projects or in **plain JavaScript.**
+
+**NOTE:** this is still a work in progress
 
 ### TODO
 - [x] Remaining form elements
 - [x] Input validation for all elements
 - [x] Consistent event handling
+- [x] Documentation of all element options
 - [ ] Capability to add multiple validation rules
-- [ ] Documentation of all element options
+- [ ] Additional elements like autocomplete, credit card field etc.
 
 ## Install
 
@@ -49,9 +52,45 @@ And then use them like so:
 ````
 **Don't forget to include the Bulma and Font Awesome CSS files!**
 
-## Options
+## Available elements
 
-For detailed information about the options, see the [Bulma documentation](https://bulma.io/documentation/form/).
+### Form fields
+
+**Form fields** are composite components offering the most convenient way to build forms. The following fields are available:
+
+- `ButtonField`
+- `DateField`
+- `EmailField`
+- `FileField`
+- `PasswordField`
+- `SelectField`
+- `TextareaField`
+- `TextField`
+
+See [**form fields**](./fields)
+
+### Form controls
+
+In cases where you may wish to use **form input fields** by themselves, you can use [**form controls**](../controls). The folliwng controls are available:
+
+- `ButtonControl`
+- `CheckboxControl`
+- `FileControl`
+- `InputControl`
+- `MultiSelectControl`
+- `RadioControl`
+- `SelectControl`
+- `TextareaControl`
+
+### Form groups
+
+Controls like **checkboxes** and **radio buttons** need to be grouped together. There is also a group for regular inputs and grouped **buttons**:
+
+- `CheckboxGroup`
+- `InputGroup`
+- `RadioGroup`
+
+## Further information
 
 ### Events
 Each input element emits a `change` event with its `value` on input change, which you can use in your app according to your needs.
@@ -94,3 +133,9 @@ const emailInput = new EmailField({
   }
 })
 ````
+
+### Reference
+
+- https://bulma.io/documentation/form/general
+- https://svelte.technology/guide
+- https://fontawesome.com/v4.7.0/
