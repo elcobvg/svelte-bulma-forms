@@ -53,6 +53,9 @@ And then use them like so:
 
 For detailed information about the options, see the [Bulma documentation](https://bulma.io/documentation/form/).
 
+### Events
+Each input element emits a `change` event with its `value` on input change, which you can use in your app according to your needs.
+
 ### Custom input validation
 In addition to the built-in default input validation, you can supply your own validation rules and messages, like this:
 
