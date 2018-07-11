@@ -21,14 +21,14 @@
 </InputField>
 
 <script>
-import { validate, email } from '../validation'
+import { validate, isEmail, makeRules } from '../validation'
 
 export default {
   components: {
     InputField: './InputField.html'
   },
   computed: {
-    validation: ({ _validate, validate }) => Object.assign(_validate, validate)
+    validation: ({ _validate, validate, required }) => makeRules({ _validate, validate, required })
   },
   data () {
     return {
@@ -46,9 +46,9 @@ export default {
       disabled: false,
       rounded: false,
       readonly: false,
-      _validate: email,
+      _validate: isEmail,
       validate: {},
-      value: null,
+      value: null
     }
   },
   methods: {

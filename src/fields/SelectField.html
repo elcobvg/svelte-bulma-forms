@@ -93,7 +93,7 @@
 
 <script>
 import uuid from 'random-uuid-v4'
-import { validate, required } from '../validation'
+import { validate, makeRules } from '../validation'
 
 export default {
   components: {
@@ -104,7 +104,7 @@ export default {
   computed: {
     id: ({ name }) => `${name.toLowerCase()}${uuid()}`,
     stateClass: ({ state }) => state ? ` is-${state}` : '',
-    validation: ({ _validate, validate }) => Object.assign(_validate, validate)
+    validation: ({ _validate, validate, required }) => makeRules({ _validate, validate, required })
   },
   data () {
     return {
@@ -120,8 +120,8 @@ export default {
       required: false,
       disabled: false,
       multiple: false,
-      _validate: required,
-      validate: {},
+      _validate: {},
+      validate: {}
     }
   },
   methods: {

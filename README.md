@@ -10,7 +10,7 @@ These components offer a convenient way to build HTML forms, either in **Svelte*
 - [x] Input validation for all elements
 - [x] Consistent event handling
 - [x] Documentation of all element options
-- [ ] Capability to add multiple validation rules
+- [x] Capability to add multiple validation rules
 - [ ] Additional elements like autocomplete, credit card field etc.
 
 ## Install
