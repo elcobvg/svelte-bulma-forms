@@ -21,14 +21,14 @@
 </InputField>
 
 <script>
-import { validate, makeRules } from '../validation'
+import { validate, isDate, makeRules } from '../validation'
 
 export default {
   components: {
     InputField: './InputField.html'
   },
   computed: {
-    validation: ({ _validate, validate, required }) => makeRules({ _validate, validate, required })
+    validation: data => makeRules(data)
   },
   data () {
     return {
@@ -47,14 +47,13 @@ export default {
       rounded: false,
       readonly: false,
       value: null,
-      _validate: {},
+      _validate: isDate,
       validate: {}
     }
   },
   methods: {
     changeValue (input) {
-      const { required } = this.get()
-      if (!required || validate(this, input)) {
+      if (validate(this, input)) {
         this.fire('change', input)
       }
     }

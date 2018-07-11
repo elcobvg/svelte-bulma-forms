@@ -7,6 +7,10 @@
 export const validate = (field, input) => {
   let { validation, iconRight, help, original } = field.get()
 
+  if (!validation) {
+    return true
+  }
+
   // store original icon & help text
   original || field.set({ original: { iconRight, help } })
   field.set({ iconRight: null })
@@ -38,12 +42,11 @@ export const validate = (field, input) => {
 
 /**
  * Helper to make the validation rules
- * @param  {Object} options._validate [description]
- * @param  {Object} options.validate  [description]
- * @param  {Boolean} options.required  [description]
+ * @param  {Object} data Data properties of form input component
  * @return {Array|Object}
  */
-export const makeRules = ({ _validate, validate, required }) => {
+export const makeRules = (data) => {
+  const { _validate, validate, required } = data
   Object.assign(_validate, validate)
   if (Object.keys(_validate).length) {
     return required ? [isRequired, _validate] : _validate
@@ -69,4 +72,19 @@ export const isRequired = {
 export const isPassword = {
   message: 'Your password must be at least 12 characters long',
   rule: /\S{12,}/
+}
+
+export const isDate = {
+  message: 'Please enter a valid date',
+  rule: /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$|^(19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|1\d|2\d|3[01])$/
+}
+
+export const isUrl = {
+  message: 'Please enter a valid URL',
+  rule: /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/
+}
+
+export const isAlphaNum = {
+  message: 'Sorry, only letters and numbers are allowed',
+  rule: /^[a-zA-Z0-9]*$/
 }

@@ -57,7 +57,7 @@ export default {
   computed: {
     id: ({ name }) => `${name.toLowerCase()}${uuid()}`,
     stateClass: ({ state }) => state ? ` is-${state}` : '',
-    validation: ({ _validate, validate, required }) => makeRules({ _validate, validate, required })
+    validation: data => makeRules(data)
   },
   data () {
     return {
@@ -77,10 +77,9 @@ export default {
     }
   },
   methods: {
-    changeValue (value) {
-      const { required } = this.get()
-      if (!required || validate(this, value)) {
-        this.fire('change', value)
+    changeValue (input) {
+      if (validate(this, input)) {
+        this.fire('change', input)
       }
     }
   }
