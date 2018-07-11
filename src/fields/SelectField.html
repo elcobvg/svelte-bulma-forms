@@ -103,7 +103,8 @@ export default {
   },
   computed: {
     id: ({ name }) => `${name.toLowerCase()}${uuid()}`,
-    stateClass: ({ state }) => state ? ` is-${state}` : ''
+    stateClass: ({ state }) => state ? ` is-${state}` : '',
+    validation: ({ _validate, validate }) => Object.assign(_validate, validate)
   },
   data () {
     return {
@@ -119,7 +120,8 @@ export default {
       required: false,
       disabled: false,
       multiple: false,
-      validation: required
+      _validate: required,
+      validate: {},
     }
   },
   methods: {

@@ -27,6 +27,9 @@ export default {
   components: {
     InputField: './InputField.html'
   },
+  computed: {
+    validation: ({ _validate, validate }) => Object.assign(_validate, validate)
+  },
   data () {
     return {
       name: '',
@@ -43,8 +46,9 @@ export default {
       disabled: false,
       rounded: false,
       readonly: false,
-      validation: email,
-      value: null
+      _validate: email,
+      validate: {},
+      value: null,
     }
   },
   methods: {
