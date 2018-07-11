@@ -11,14 +11,14 @@ export const validate = (field, input) => {
     field.set({
       help: validation.message,
       state: 'danger',
-      iconRight: 'fas fa-exclamation-triangle'
+      iconRight: 'fa fa-exclamation-triangle'
     })
     return false
   }
   field.set({
     help: '',
     state: 'success',
-    iconRight: 'fas fa-check'
+    iconRight: 'fa fa-check'
   })
   return true
 }
