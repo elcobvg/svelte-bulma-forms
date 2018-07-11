@@ -67,11 +67,11 @@ And then use them like so:
 - `TextareaField`
 - `TextField`
 
-See [**form fields**](./fields)
+See [**form fields**](https://github.com/elcobvg/svelte-bulma-forms/tree/master/src/fields)
 
 ### Form controls
 
-In cases where you may wish to use **form input fields** by themselves, you can use [**form controls**](../controls). The folliwng controls are available:
+In cases where you may wish to use **form input fields** by themselves, you can use [**form controls**](https://github.com/elcobvg/svelte-bulma-forms/tree/master/src/controls). The folliwng controls are available:
 
 - `ButtonControl`
 - `CheckboxControl`
@@ -89,6 +89,8 @@ Controls like **checkboxes** and **radio buttons** need to be grouped together. 
 - `CheckboxGroup`
 - `InputGroup`
 - `RadioGroup`
+
+See [**form groups**](https://github.com/elcobvg/svelte-bulma-forms/tree/master/src/groups)
 
 ## Further information
 

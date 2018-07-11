@@ -1,6 +1,6 @@
 # Form controls
 
-The **form control** is a versatile container meant to enhance **single form controls.** Form controls are the basic units to build Bulma forms. Controls can be used directly, but when combining several controls in a **form**, or when using **labels** or **help** texts, you should use [**form fields**](../fields)
+The **form control** is a versatile container meant to enhance **single form controls.** Form controls are the basic units to build Bulma forms. Controls can be used directly, but when combining several controls in a **form**, or when using **labels** or **help** texts, you should use [**form fields**](https://github.com/elcobvg/svelte-bulma-forms/tree/master/src/fields)
 
 ## Button
 
@@ -64,7 +64,7 @@ You won't usually use this control stand-alone, but in a `<FileField>`
 ## Input
 
 Generic control for **text type inputs.**
-You won't usually use this control stand-alone, but use one of the [**input fields**](../fields).
+You won't usually use this control stand-alone, but use one of the [**input fields**](https://github.com/elcobvg/svelte-bulma-forms/tree/master/src/fields).
 
 ### Markup
 

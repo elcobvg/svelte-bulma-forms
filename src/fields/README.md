@@ -9,7 +9,7 @@ The `field` container is a simple container for:
 
 All **form fields** feature input validation where applicable, which can be extended with custom rules and/or messages.
 
-In cases where you may wish to use **form input fields** by themselves, you can use [**form controls**](../controls)
+In cases where you may wish to use **form input fields** by themselves, you can use [**form controls**](https://github.com/elcobvg/svelte-bulma-forms/tree/master/src/controls)
 
 ## Button
 
