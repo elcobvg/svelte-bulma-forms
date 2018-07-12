@@ -11,6 +11,24 @@ All **form fields** feature input validation where applicable, which can be exte
 
 In cases where you may wish to use **form input fields** by themselves, you can use [**form controls**](https://github.com/elcobvg/svelte-bulma-forms/tree/master/src/controls)
 
+## AutoComplete
+
+Text input with autocomplete
+
+### Markup
+
+```html
+<AutoCompleteField name="fruits" items="{fruits}" label="Select fruit" />
+```
+### Props
+
+Same as for **regular text field** (see below), plus the following:
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| items | Array | [] | true | the list of selectable items
+| isAsync | Boolean | false | false | data provided async or not
+
 ## Button
 
 ### Markup

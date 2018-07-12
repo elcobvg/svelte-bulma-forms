@@ -1,0 +1,156 @@
+{#if horizontal}
+<div class="field  is-horizontal{addOn ? ' has-addons' : ''}">
+  <div class="field-label is-normal">
+{#if label}
+    <FieldLabel {id} {size} {required} {label} />
+{/if}
+  </div>
+{#if addOn}
+  <div class="field-body">
+    <div class="field is-expanded">
+      <div class="field has-addons">
+        <AutoCompleteControl 
+          {items}
+          {name}
+          {id}
+          {placeholder}
+          {iconLeft}
+          {iconRight}
+          {state}
+          {size}
+          {required}
+          {disabled}
+          {value}
+          {rounded}
+          {readonly}
+          on:change="changeValue(event)"
+          on:focus="set({ hasFocus: true })"
+          on:blur="set({ hasFocus: false })"
+        />
+        <slot><!-- addon is injected here --></slot>
+      </div>
+{#if help}
+      <p class="help{stateClass}">{help}</p>
+{/if}
+    </div>
+  </div>
+{:else}
+  <div class="field-body">
+    <div class="field">
+      <AutoCompleteControl 
+        {items}
+        {name}
+        {id}
+        {placeholder}
+        {iconLeft}
+        {iconRight}
+        {state}
+        {size}
+        {required}
+        {disabled}
+        {value}
+        {rounded}
+        {readonly}
+        on:change="changeValue(event)"
+        on:focus="set({ hasFocus: true })"
+        on:blur="set({ hasFocus: false })"
+      />
+{#if help}
+      <p class="help{stateClass}">{help}</p>
+{/if}
+    </div>
+  </div>
+{/if}
+</div>
+
+{:else}
+<div class="field{addOn ? ' has-addons' : ''}">
+{#if label}
+  <FieldLabel {id} {size} {required} {label} />
+{/if}
+  <div class="has-addons">
+    <AutoCompleteControl 
+      {items}
+      {name}
+      {id}
+      {placeholder}
+      {iconLeft}
+      {iconRight}
+      {state}
+      {size}
+      {required}
+      {disabled}
+      {value}
+      {rounded}
+      {readonly}
+      on:change="changeValue(event)"
+      on:focus="set({ hasFocus: true })"
+      on:blur="set({ hasFocus: false })"
+    />
+    <slot><!-- addon is injected here --></slot>
+  </div>
+{#if help}
+  <p class="help{stateClass}">{help}</p>
+{/if}
+</div>
+{/if}
+
+<script>
+import uuid from 'random-uuid-v4'
+import { validate, makeRules } from '../validation'
+
+export default {
+  components: {
+    FieldLabel: './FieldLabel.html',
+    AutoCompleteControl: '../controls/AutoCompleteControl.html'
+  },
+  computed: {
+    id: ({ name }) => `${name.toLowerCase()}${uuid()}`,
+    stateClass: ({ state }) => state ? ` is-${state}` : '',
+    validation: data => makeRules(data)
+  },
+  data () {
+    return {
+      placeholder: '',
+      hasFocus: false,
+      items: [],
+      _validate: {},
+      validate: {}
+    }
+  },
+  methods: {
+    changeValue (input) {
+      if (validate(this, input)) {
+        this.fire('change', input)
+      }
+    }
+  }
+}
+</script>
+
+<style>
+
+/* Correct label position with addons in vertical layout */
+.field.has-addons {
+  display: block;
+}
+
+.field.is-horizontal.has-addons,
+.field.has-addons .has-addons {
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* Correct label position with addons on mobile horizontal */
+@media screen and (max-width: 768px) {
+  .field.is-horizontal.has-addons {
+    display: block;
+  }
+
+  .field.is-horizontal.has-addons .field.has-addons {
+    display: flex;
+    justify-content: flex-start;
+  }
+}
+
+</style>

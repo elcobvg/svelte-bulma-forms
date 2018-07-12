@@ -2,6 +2,24 @@
 
 The **form control** is a versatile container meant to enhance **single form controls.** Form controls are the basic units to build Bulma forms. Controls can be used directly, but when combining several controls in a **form**, or when using **labels** or **help** texts, you should use [**form fields**](https://github.com/elcobvg/svelte-bulma-forms/tree/master/src/fields)
 
+## AutoComplete
+
+Text input with autocomplete
+
+### Markup
+
+```html
+<AutoCompleteControl name="fruits" items="{fruits}" isAsync />
+```
+### Props
+
+Same as for **regular input control** (see below), plus the following:
+
+| Prop | Type | Default | Required | Description |
+|------|------|---------|----------|-------------|
+| items | Array | [] | true | the list of selectable items
+| isAsync | Boolean | false | false | data provided async or not
+
 ## Button
 
 ### Markup

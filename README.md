@@ -11,7 +11,8 @@ These components offer a convenient way to build HTML forms, either in **Svelte*
 - [x] Consistent event handling
 - [x] Documentation of all element options
 - [x] Capability to add multiple validation rules
-- [ ] Additional elements like autocomplete, credit card field etc.
+- [x] Additional elements like autocomplete, credit card field etc.
+- [ ] Add capability to use external validation libraries
 
 ## Install
 
@@ -58,6 +59,7 @@ And then use them like so:
 
 **Form fields** are composite components offering the most convenient way to build forms. The following fields are available:
 
+- `AutoCompleteField`
 - `ButtonField`
 - `DateField`
 - `EmailField`
@@ -71,8 +73,9 @@ See [**form fields**](https://github.com/elcobvg/svelte-bulma-forms/tree/master/
 
 ### Form controls
 
-In cases where you may wish to use **form input fields** by themselves, you can use [**form controls**](https://github.com/elcobvg/svelte-bulma-forms/tree/master/src/controls). The folliwng controls are available:
+In cases where you may wish to use **form input fields** by themselves, you can use [**form controls**](https://github.com/elcobvg/svelte-bulma-forms/tree/master/src/controls). The following controls are available:
 
+- `AutoCompleteControl`
 - `ButtonControl`
 - `CheckboxControl`
 - `FileControl`

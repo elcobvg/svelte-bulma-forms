@@ -1,0 +1,180 @@
+<svelte:window on:click="handleClickOutside(event)" />
+
+<div on:click="event.stopPropagation()" 
+    class="autocomplete control{iconLeft ? ' has-icons-left' : ''}{iconRight ? ' has-icons-right' : ''}">
+  <input 
+    class="input{stateClass}{sizeClass}{rounded ? ' is-rounded' : ''}" 
+    type="text"
+    {name}
+    {id}
+    {placeholder}
+    {required}
+    {disabled}
+    {value}
+    {readonly}
+    autocomplete="{placeholder}" 
+    bind:value="search"
+    on:input="onChange(event)"
+    on:focus="fire('focus', event)"
+    on:blur="fire('blur', event)"
+    on:keydown="onKeyDown(event)"
+  >
+{#if iconLeft}
+  <span class="icon is-small is-left">
+    <i class="{iconLeft}"></i>
+  </span>
+{/if}
+{#if iconRight}
+  <span class="icon is-small is-right">
+    <i class="{iconRight}"></i>
+  </span>
+{/if}
+
+
+  <ul class="autocomplete-results{!isOpen ? ' hide-results' : ''}" ref:list>
+  {#if isLoading}
+    <li class="loading">Loading results...</li>
+  {:else}
+    {#each results as result, i}
+    <li on:click="setResult(result)" class="autocomplete-result{ i === arrowCounter ? ' is-active' : '' }">
+      {result}
+    </li>
+    {/each}
+  {/if}
+  </ul>
+</div>
+
+<script>
+export default {
+  computed: {
+    stateClass: ({ state }) => state ? ` is-${state}` : '',
+    sizeClass: ({ size }) => size ? ` is-${size}` : ''
+  },
+  data () {
+    return {
+      type: 'text',
+      id: '',
+      name: '',
+      value: null,
+      placeholder: '',
+      iconLeft: null,
+      iconRight: null,
+      state: null,
+      size: null,
+      required: false,
+      disabled: false,
+      readonly: false,
+
+      // autocomplete props
+      items: [],
+      isAsync: false,
+      isOpen: false,
+      results: [],
+      search: '',
+      isLoading: false,
+      arrowCounter: 0
+    }
+  },
+  methods: {
+    onChange (event) {
+      this.fire('input', event)
+
+      // Is the data given by an outside ajax request?
+      if (this.get().isAsync) {
+        this.set({ isLoading: true })
+      } else {
+        // Let's filter our flat array
+        this.filterResults()
+        this.set({ isOpen: true })
+      }
+    },
+    filterResults () {
+      // first capitalize all the things
+      const { items, search } = this.get()
+      const results = items.filter((item) => {
+        return item.toUpperCase().startsWith(search.toUpperCase())
+      })
+      this.set({ results })
+      const height = results.length > 10 ? 15 : results.length * 1.5
+      this.refs.list.style.height = `${height + 0.75}rem`
+    },
+    setResult (result) {
+      this.set({
+        search: result,
+        isOpen: false
+      })
+      this.fire('change', result)
+    },
+    handleClickOutside (event) {
+      this.set({
+        isOpen: false,
+        arrowCounter: -1
+      })
+    },
+    onKeyDown (event) {
+      const { arrowCounter, results } = this.get()
+
+      if (event.key === 'ArrowDown') {
+        if (arrowCounter < results.length) {
+          this.set({ arrowCounter: arrowCounter + 1 })
+        }
+      } else if (event.key === 'ArrowUp') {
+        if (arrowCounter > 0) {
+          this.set({ arrowCounter: arrowCounter - 1 })
+        }
+      } else if (event.key === 'Enter') {
+        this.set({
+          search: results[arrowCounter],
+          isOpen: false,
+          arrowCounter: -1
+        })
+      }
+    }
+  },
+  onupdate ({ changed, current, previous }) {
+    if (changed.items && previous && current.items.length !== previous.items.length) {
+      this.set({
+        results: current.items,
+        isLoading: false
+      })
+    }
+  }
+}
+</script>
+
+<style>
+  .autocomplete {
+    position: relative;
+  }
+
+  .hide-results {
+    display: none;
+  }
+
+  .autocomplete-results {
+    padding: 0;
+    margin: 0;
+    border: 1px solid #dbdbdb;
+    height: 4.5rem;
+    overflow: auto;
+    width: 100%;
+
+    background-color: white;
+    box-shadow: 2px 2px 24px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    z-index: 100;
+  }
+
+  .autocomplete-result {
+    list-style: none;
+    text-align: left;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+  }
+
+  .autocomplete-result.is-active,
+  .autocomplete-result:hover {
+    background-color: #dbdbdb;
+  }
+
+</style>

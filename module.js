@@ -1,4 +1,5 @@
 export {
+  AutoCompleteField,
   ButtonField,
   DateField,
   EmailField,
@@ -7,6 +8,7 @@ export {
   SelectField,
   TextareaField,
   TextField,
+  AutoCompleteControl,
   ButtonControl,
   CheckboxControl,
   RadioControl,
