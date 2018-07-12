@@ -7,9 +7,12 @@
 export const validate = (field, input) => {
   let { validation, iconRight, help, original } = field.get()
 
-  if (!validation) {
+  if(!validation) {
     return true
   }
+
+  // coerce to string
+  input = input + ''
 
   // store original icon & help text
   original || field.set({ original: { iconRight, help } })
@@ -21,19 +24,35 @@ export const validate = (field, input) => {
   }
 
   for (const validator of validation) {
-    if (!validator.rule.test(input)) {
-      field.set({
-        help: validator.message,
-        state: 'danger',
-        iconRight: 'fa fa-exclamation-triangle'
-      })
-      // return on first failed rule
-      return false
+    let pass = true
+    if (typeof validator.rule === 'function') {
+      const { options } = validator
+      pass = validator.rule(input, options)
+    } else {
+      pass = validator.rule.test(input)
+    }
+    // return on first failed rule
+    if (!pass) {
+      return fail(field, validator.message)
     }
   }
   // all rules passed
+  return success(field)
+}
+
+const fail = (field, message) => {
   field.set({
-    help: '',
+    help: message,
+    state: 'danger',
+    iconRight: 'fa fa-exclamation-triangle'
+  })
+  return false
+}
+
+const success = (field) => {
+  const { original } = field.get()
+  field.set({
+    help: original ? original.help : '',
     state: 'success',
     iconRight: 'fa fa-check'
   })
@@ -84,7 +103,13 @@ export const isUrl = {
   rule: /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/
 }
 
+export const isUrlSafe = {
+  message: "Sorry, only letters, numbers, '-' and '_' are allowed",
+  rule: /^[a-zA-Z0-9_-]*$/
+}
+
 export const isAlphaNum = {
   message: 'Sorry, only letters and numbers are allowed',
   rule: /^[a-zA-Z0-9]*$/
 }
+

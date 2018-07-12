@@ -32,15 +32,15 @@
 
 
   <ul class="autocomplete-results{!isOpen ? ' hide-results' : ''}" ref:list>
-  {#if isLoading}
+{#if isLoading}
     <li class="loading">Loading results...</li>
-  {:else}
-    {#each results as result, i}
+{:else}
+  {#each results as result, i}
     <li on:click="setResult(result)" class="autocomplete-result{ i === arrowCounter ? ' is-active' : '' }">
-      {result}
+    {result}
     </li>
-    {/each}
-  {/if}
+  {/each}
+{/if}
   </ul>
 </div>
 
@@ -95,8 +95,8 @@ export default {
         return item.toUpperCase().startsWith(search.toUpperCase())
       })
       this.set({ results })
-      const height = results.length > 10 ? 15 : results.length * 1.5
-      this.refs.list.style.height = `${height + 0.75}rem`
+      const height = results.length > 10 ? 20 : results.length * 2
+      this.refs.list.style.height = `${height + 1}rem`
     },
     setResult (result) {
       this.set({
