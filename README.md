@@ -5,6 +5,8 @@ These components offer a convenient way to build HTML forms, either in **Svelte*
 
 **NOTE:** this is still a work in progress
 
+#### Demo at http://svelte-bulma-forms.surge.sh/
+
 
 ## Install
 
