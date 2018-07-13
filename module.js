@@ -11,6 +11,7 @@ export {
   AutoCompleteControl,
   ButtonControl,
   CheckboxControl,
+  InputControl,
   RadioControl,
   CheckboxGroup,
   InputGroup,

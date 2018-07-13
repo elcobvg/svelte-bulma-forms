@@ -11,6 +11,7 @@ export { default as TextField } from './fields/TextField.html'
 export { default as AutoCompleteControl } from './controls/AutoCompleteControl.html'
 export { default as ButtonControl } from './controls/ButtonControl.html'
 export { default as CheckboxControl } from './controls/CheckboxControl.html'
+export { default as InputControl } from './controls/InputControl.html'
 export { default as RadioControl } from './controls/RadioControl.html'
 
 export { default as CheckboxGroup } from './groups/CheckboxGroup.html'
