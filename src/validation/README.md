@@ -24,7 +24,8 @@ The custom validator is merged with the default settings, so you can choose to o
 
 ### Validation using a compare function
 
-Instead of a `RegExp` you can also use a `function` to validate the input. This way, you can use an external validation library like [**validator.js**](https://github.com/chriso/validator.js), if you want. 
+Instead of a `RegExp` you can also use a `function` to validate the input. It can be any function, as long as it returns a **truthy** or **falsy** value.
+This way, you can use an external validation library like [**validator.js**](https://github.com/chriso/validator.js), if you want. 
 
 The validator object can have an extra prop `options`, which will be passed as second argument to the compare function.
 
@@ -37,9 +38,9 @@ To validate credit card input:
 ````
 
 ````javascript
+// Your Svelte component
 import isCreditCard from 'validator/lib/isCreditCard'
 
-// Your Svelte component
 export default {
   data () {
     return {

@@ -1,11 +1,11 @@
 {#if horizontal}
-<div class="field  is-horizontal{addOn ? ' has-addons' : ''}">
+<div class="field  is-horizontal{addon ? ' has-addons' : ''}">
   <div class="field-label is-normal">
 {#if label}
     <FieldLabel {id} {size} {required} {label} />
 {/if}
   </div>
-{#if addOn}
+{#if addon}
   <div class="field-body">
     <div class="field is-expanded">
       <div class="field has-addons">
@@ -64,7 +64,7 @@
 </div>
 
 {:else}
-<div class="field{addOn ? ' has-addons' : ''}">
+<div class="field{addon ? ' has-addons' : ''}">
 {#if label}
   <FieldLabel {id} {size} {required} {label} />
 {/if}
@@ -124,6 +124,9 @@ export default {
         this.fire('change', input)
       }
     }
+  },
+  oncreate () {
+    this.set({ addon: !!this.options.slots })
   }
 }
 </script>

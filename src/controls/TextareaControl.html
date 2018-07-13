@@ -4,7 +4,7 @@
     {name} 
     {id}
     {placeholder}
-    rows="{rows || 5}"
+    {rows}
     bind:value="value"
     on:change="fire('change', value)"
   />
@@ -22,7 +22,7 @@ export default {
       placeholder: '',
       state: '',
       size: '',
-      rows: null
+      rows: 5
     }
   }
 }

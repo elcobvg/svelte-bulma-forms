@@ -1,7 +1,7 @@
 {
   "name": "svelte-bulma-forms",
   "description": "svelte-bulma-forms",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/elcobvg/svelte-bulma-forms.git"
@@ -27,9 +27,13 @@
     "standard": "^11.0.1",
     "svelte": "^2.9.1"
   },
+  "files": [
+    "dist"
+  ],
   "main": "dist/index.js",
-  "module": "module.js",
+  "module": "dist/module.js",
   "svelte": "src/index.js",
+  "svelte.root": "src",
   "scripts": {
     "lint": "standard --plugin html --ext .js,.html src/**/* --fix",
     "dist": "rollup -c",
@@ -39,6 +43,9 @@
     "javascript",
     "svelte",
     "bulma",
-    "form"
+    "forms",
+    "svelte-components",
+    "ui",
+    "validation"
   ]
 }

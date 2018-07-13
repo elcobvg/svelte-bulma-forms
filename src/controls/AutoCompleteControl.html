@@ -10,7 +10,7 @@
     {placeholder}
     {required}
     {disabled}
-    {value}
+    value="{value || ''}"
     {readonly}
     autocomplete="{placeholder}" 
     bind:value="search"
@@ -55,7 +55,7 @@ export default {
       type: 'text',
       id: '',
       name: '',
-      value: null,
+      value: '',
       placeholder: '',
       iconLeft: null,
       iconRight: null,
@@ -101,6 +101,7 @@ export default {
     setResult (result) {
       this.set({
         search: result,
+        value: result,
         isOpen: false
       })
       this.fire('change', result)
@@ -123,6 +124,7 @@ export default {
           this.set({ arrowCounter: arrowCounter - 1 })
         }
       } else if (event.key === 'Enter') {
+        event.stopPropagation()
         this.set({
           search: results[arrowCounter],
           isOpen: false,

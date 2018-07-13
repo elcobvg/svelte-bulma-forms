@@ -1,5 +1,5 @@
 {#if horizontal}
-<div class="field is-horizontal{addOn ? ' has-addons' : ''}">
+<div class="field is-horizontal{addon ? ' has-addons' : ''}">
   <div class="field-label is-normal">
 {#if label}
     <FieldLabel {id} {size} {required} {label} />
@@ -37,8 +37,8 @@
         <slot><!-- options are injected here --></slot>
       </SelectControl>
 {/if}
-{#if addOn}
-      <slot name="addOn"><!-- addon is injected here --></slot>
+{#if addon}
+      <slot name="addon"><!-- addon is injected here --></slot>
 {/if}
 {#if help}
       <p class="help{stateClass}">{help}</p>
@@ -48,7 +48,7 @@
 </div>
 
 {:else}
-<div class="field{addOn ? ' has-addons' : ''}">
+<div class="field{addon ? ' has-addons' : ''}">
 {#if label}
   <FieldLabel {id} {size} {required} {label} />
 {/if}
@@ -82,8 +82,8 @@
     <slot><!-- options are injected here --></slot>
   </SelectControl>
 {/if}
-{#if addOn}
-  <slot name="addOn"><!-- addon is injected here --></slot>
+{#if addon}
+  <slot name="addon"><!-- addon is injected here --></slot>
 {/if}
 {#if help}
   <p class="help{stateClass}">{help}</p>
@@ -112,7 +112,7 @@ export default {
       value: null,
       help: '',
       iconLeft: null,
-      addOn: null,
+      addon: null,
       horizontal: null,
       label: '',
       state: null,
@@ -131,10 +131,8 @@ export default {
       }
     }
   },
-  onstate ({ previous }) {
-    if (Object.entries(this._slotted).length && !previous) {
-      this.set({ addOn: true })
-    }
+  oncreate () {
+    this.set({ addon: !!this.options.slots })
   }
 }
 </script>

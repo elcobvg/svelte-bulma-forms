@@ -5,7 +5,7 @@
   {help}
   {iconLeft}
   {iconRight}
-  {addOn}
+  {addon}
   {horizontal}
   {label}
   {state}
@@ -37,7 +37,7 @@ export default {
       help: '',
       iconLeft: 'fa fa-envelope',
       iconRight: null,
-      addOn: null,
+      addon: null,
       horizontal: false,
       label: '',
       state: null,
@@ -58,10 +58,8 @@ export default {
       }
     }
   },
-  onstate ({ previous }) {
-    if (Object.entries(this._slotted).length && !previous) {
-      this.set({ addOn: true })
-    }
+  oncreate () {
+    this.set({ addon: !!this.options.slots })
   }
 }
 </script>

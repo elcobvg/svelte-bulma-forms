@@ -1,5 +1,5 @@
 {#if horizontal}
-<div class="field is-horizontal{addOn ? ' has-addons' : ''}">
+<div class="field is-horizontal{addon ? ' has-addons' : ''}">
   <div class="field-label is-normal">
 {#if label}
     <FieldLabel {id} {size} {label} />
@@ -15,7 +15,7 @@
         {size}
         on:click="buttonClick(event)"
       />
-{#if addOn}
+{#if addon}
       <slot><!-- addon is injected here --></slot>
 {/if}
     </div>
@@ -23,7 +23,7 @@
 </div>
 
 {:else}
-<div class="field{addOn ? ' has-addons' : ''}">
+<div class="field{addon ? ' has-addons' : ''}">
 {#if label}
   <FieldLabel {id} {size} {label} />
 {/if}
@@ -35,7 +35,7 @@
     {size}
     on:click="buttonClick(event)"
   />
-{#if addOn}
+{#if addon}
   <slot><!-- addon is injected here --></slot>
 {/if}
 </div>
@@ -55,7 +55,7 @@ export default {
   data () {
     return {
       label: '',
-      addOn: null,
+      addon: null,
       type: 'button',
       name: 'Submit',
       state: 'primary',

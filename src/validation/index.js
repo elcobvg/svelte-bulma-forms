@@ -7,7 +7,7 @@
 export const validate = (field, input) => {
   let { validation, iconRight, help, original } = field.get()
 
-  if(!validation) {
+  if (!validation) {
     return true
   }
 
@@ -112,4 +112,3 @@ export const isAlphaNum = {
   message: 'Sorry, only letters and numbers are allowed',
   rule: /^[a-zA-Z0-9]*$/
 }
-

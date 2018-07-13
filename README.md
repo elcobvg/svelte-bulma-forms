@@ -45,6 +45,20 @@ And then use them like so:
 ````
 **Don't forget to include the Bulma and Font Awesome CSS files!**
 
+For including styles, you can either place the below styles in the `<head>` of your template:
+
+````html
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+````
+
+Or you can import it to your webpack/rollup entry point:
+
+````javascript
+require('/path/to/node_modules/bulma/css/bulma.min.css')
+require('/path/to/node_modules/font-awesome/css/font-awesome.min.css')
+````
+
 ## Available elements
 
 ### Form fields
