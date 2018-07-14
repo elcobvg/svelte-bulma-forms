@@ -1,5 +1,4 @@
-{#if horizontal}
-<div class="field is-horizontal is-grouped">
+<div class="field is-grouped{horizontal ? ' is-horizontal' : ''}">
   <div class="field-label">
 {#if label}
     <FieldLabel {id} {size} {required} {label} />
@@ -9,22 +8,6 @@
     <slot><!-- input controls go here --></slot>
   </div>
 </div>
-
-{:elseif label}
-<div class="field is-grouped">
-  <div class="field-label">
-    <FieldLabel {id} {size} {required} {label} />
-  </div>
-  <div class="field-body">
-      <slot><!-- input controls go here --></slot>
-  </div>
-</div>
-
-{:else}
-<div class="field is-grouped">
-  <slot><!-- input controls go here --></slot>
-</div>
-{/if}
 
 <script>
 import uuid from 'random-uuid-v4'
@@ -50,16 +33,34 @@ export default {
 
 <style>
 
+/* Correct flex behavior on mobile */
+/* @media screen and (max-width: 768px) { */
+.field.is-grouped {
+  display: block;
+}
+
+.field.is-grouped .field-body {
+  display: flex;
+}
+/* } */
+
 /* Correct label position in vertical layout */
 .field-label {
   text-align: left;
 }
 
-.is-horizontal .field-label {
-  text-align: right;
+@media screen and (min-width: 769px) {
+  .is-horizontal .field-label {
+    text-align: right;
+  }
+
+  .is-horizontal.is-grouped {
+    display: flex;
+  }
 }
 
 .is-grouped .field-body > :global(.control:not(:last-child)) {
   margin-right: .75rem;
 }
+
 </style>

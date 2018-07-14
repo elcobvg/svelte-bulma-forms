@@ -1,23 +1,9 @@
-{#if horizontal}
-<div class="field is-horizontal">
+{#if horizontal || label}
+<div class="field{horizontal ? ' is-horizontal' : ''}">
   <div class="field-label">
 {#if label}
     <FieldLabel {id} {size} {required} {label} />
 {/if}
-  </div>
-  <div class="field-body">
-    <div class="field is-narrow">
-      <div class="control">
-        <slot><!-- radio controls go here --></slot>
-      </div>
-    </div>
-  </div>
-</div>
-
-{:elseif label}
-<div class="field">
-  <div class="field-label">
-    <FieldLabel {id} {size} {required} {label} />
   </div>
   <div class="field-body">
     <div class="field is-narrow">
@@ -64,8 +50,10 @@ export default {
   text-align: left;
 }
 
-.is-horizontal .field-label {
-  text-align: right;
+@media screen and (min-width: 769px) {
+  .is-horizontal .field-label {
+    text-align: right;
+  }
 }
 
 </style>
