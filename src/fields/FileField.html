@@ -28,7 +28,7 @@
 {/if}
 
 <script>
-import uuid from 'random-uuid-v4'
+import { id, stateClass } from '../helpers'
 
 export default {
   components: {
@@ -36,22 +36,22 @@ export default {
     FileControl: '../controls/FileControl.html'
   },
   computed: {
-    id: ({ name }) => `${name.toLowerCase()}${uuid()}`,
-    stateClass: ({ state }) => state ? ` is-${state}` : ''
+    id: ({ name }) => id(name),
+    stateClass: ({ state }) => stateClass(state)
   },
   data () {
     return {
-      name: '',
-      value: null,
+      disabled: false,
+      file: '',
       help: '',
       horizontal: null,
       label: '',
-      state: null,
-      size: null,
+      name: '',
       required: false,
-      disabled: false,
-      file: '',
-      right: false
+      right: false,
+      size: null,
+      state: null,
+      value: null
     }
   }
 }

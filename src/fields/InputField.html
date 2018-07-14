@@ -90,7 +90,7 @@
 {/if}
 
 <script>
-import uuid from 'random-uuid-v4'
+import { id, stateClass } from '../helpers'
 
 export default {
   components: {
@@ -98,8 +98,8 @@ export default {
     InputControl: '../controls/InputControl.html'
   },
   computed: {
-    id: ({ name }) => `${name.toLowerCase()}${uuid()}`,
-    stateClass: ({ state }) => state ? ` is-${state}` : ''
+    id: ({ name }) => id(name),
+    stateClass: ({ state }) => stateClass(state)
   },
   methods: {
     changeValue (event) {

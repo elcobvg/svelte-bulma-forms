@@ -42,7 +42,7 @@
 {/if}
 
 <script>
-import uuid from 'random-uuid-v4'
+import { id } from '../helpers'
 
 export default {
   components: {
@@ -50,16 +50,16 @@ export default {
     ButtonControl: '../controls/ButtonControl.html'
   },
   computed: {
-    id: ({ name }) => `${name.toLowerCase()}${uuid()}`
+    id: ({ name }) => id(name)
   },
   data () {
     return {
-      label: '',
       addon: null,
-      type: 'button',
+      label: '',
       name: 'Submit',
+      size: null,
       state: 'primary',
-      size: null
+      type: 'button'
     }
   },
   methods: {

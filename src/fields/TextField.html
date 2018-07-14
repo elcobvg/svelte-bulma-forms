@@ -32,23 +32,23 @@ export default {
   },
   data () {
     return {
-      name: '',
-      placeholder: '',
+      _validate: {},
+      addon: null,
+      disabled: false,
       help: '',
+      horizontal: false,
       iconLeft: null,
       iconRight: null,
-      addon: null,
-      horizontal: false,
       label: '',
-      state: null,
-      size: null,
-      required: false,
-      disabled: false,
-      rounded: false,
+      name: '',
+      placeholder: '',
       readonly: false,
-      value: '',
-      _validate: {},
-      validate: {}
+      required: false,
+      rounded: false,
+      size: null,
+      state: null,
+      validate: {},
+      value: ''
     }
   },
   methods: {

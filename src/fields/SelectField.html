@@ -92,7 +92,7 @@
 {/if}
 
 <script>
-import uuid from 'random-uuid-v4'
+import { id, stateClass } from '../helpers'
 import { validate, makeRules } from '../validation'
 
 export default {
@@ -102,26 +102,28 @@ export default {
     MultiSelectControl: '../controls/MultiSelectControl.html'
   },
   computed: {
-    id: ({ name }) => `${name.toLowerCase()}${uuid()}`,
-    stateClass: ({ state }) => state ? ` is-${state}` : '',
+    id: ({ name }) => id(name),
+    stateClass: ({ state }) => stateClass(state),
     validation: data => makeRules(data)
   },
   data () {
     return {
-      name: '',
-      value: null,
-      help: '',
-      iconLeft: null,
-      addon: null,
-      horizontal: null,
-      label: '',
-      state: null,
-      size: null,
-      required: false,
-      disabled: false,
-      multiple: false,
       _validate: {},
-      validate: {}
+      addon: null,
+      disabled: false,
+      help: '',
+      horizontal: null,
+      iconLeft: null,
+      label: '',
+      multiple: false,
+      name: '',
+      readonly: false,
+      required: false,
+      rounded: false,
+      size: null,
+      state: null,
+      validate: {},
+      value: null
     }
   },
   methods: {

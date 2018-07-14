@@ -46,7 +46,7 @@
 {/if}
 
 <script>
-import uuid from 'random-uuid-v4'
+import { id, stateClass } from '../helpers'
 import { validate, makeRules } from '../validation'
 
 export default {
@@ -55,25 +55,25 @@ export default {
     TextareaControl: '../controls/TextareaControl.html'
   },
   computed: {
-    id: ({ name }) => `${name.toLowerCase()}${uuid()}`,
-    stateClass: ({ state }) => state ? ` is-${state}` : '',
+    id: ({ name }) => id(name),
+    stateClass: ({ state }) => stateClass(state),
     validation: data => makeRules(data)
   },
   data () {
     return {
-      type: 'text',
-      name: '',
-      value: null,
-      placeholder: '',
+      _validate: {},
       help: '',
       horizontal: false,
       label: '',
-      state: null,
-      size: null,
+      name: '',
+      placeholder: '',
       required: false,
       rows: null,
-      _validate: {},
-      validate: {}
+      size: null,
+      state: null,
+      type: 'text',
+      validate: {},
+      value: null
     }
   },
   methods: {

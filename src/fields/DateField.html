@@ -32,23 +32,23 @@ export default {
   },
   data () {
     return {
-      name: '',
-      placeholder: '',
+      _validate: isDate,
+      addon: null,
+      disabled: false,
       help: '',
+      horizontal: false,
       iconLeft: 'fa fa-calendar',
       iconRight: null,
-      addon: null,
-      horizontal: false,
       label: '',
-      state: null,
-      size: null,
-      required: false,
-      disabled: false,
-      rounded: false,
+      name: '',
+      placeholder: '',
       readonly: false,
-      value: null,
-      _validate: isDate,
-      validate: {}
+      required: false,
+      rounded: false,
+      size: null,
+      state: null,
+      validate: {},
+      value: null
     }
   },
   methods: {

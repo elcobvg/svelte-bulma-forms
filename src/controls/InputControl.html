@@ -1,9 +1,9 @@
 <div class="control{iconLeft ? ' has-icons-left' : ''}{iconRight ? ' has-icons-right' : ''}">
   <input 
     class="input{stateClass}{sizeClass}{rounded ? ' is-rounded' : ''}" 
+    id="{_id}"
     {type} 
     {name}
-    {id}
     {placeholder}
     {required}
     {disabled}
@@ -25,25 +25,29 @@
 </div>
 
 <script>
+import uuid from 'random-uuid-v4'
+
 export default {
   computed: {
+    _id: ({ id }) => id || uuid(),
     stateClass: ({ state }) => state ? ` is-${state}` : '',
     sizeClass: ({ size }) => size ? ` is-${size}` : ''
   },
   data () {
     return {
-      type: 'text',
-      id: '',
-      name: '',
-      value: '',
-      placeholder: '',
+      disabled: false,
       iconLeft: null,
       iconRight: null,
-      state: null,
-      size: null,
+      id: '',
+      name: '',
+      placeholder: '',
+      readonly: false,
       required: false,
-      disabled: false,
-      readonly: false
+      rounded: false,
+      size: null,
+      state: null,
+      type: 'text',
+      value: ''
     }
   }
 }

@@ -6,16 +6,18 @@
 </label>
 
 <script>
+import { sizeClass } from '../helpers'
+
 export default {
   computed: {
-    sizeClass: ({ size }) => size ? ` is-${size}` : ''
+    sizeClass: ({ size }) => sizeClass(size)
   },
   data () {
     return {
       id: '',
       label: '',
-      size: '',
-      required: false
+      required: false,
+      size: ''
     }
   }
 }
