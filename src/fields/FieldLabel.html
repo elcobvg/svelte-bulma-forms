@@ -6,7 +6,7 @@
 </label>
 
 <script>
-import { sizeClass } from '../helpers'
+import { id, sizeClass } from '../helpers'
 
 export default {
   computed: {
@@ -25,6 +25,15 @@ export default {
 
 <style>
 .has-text-danger {
-  margin-right: -0.75rem;
+  margin-right: -0.75em;
+}
+.label.is-small {
+  font-size: .75em;
+}
+.label.is-medium {
+  font-size: 1.25rem;
+}
+.label.is-large {
+  font-size: 1.5rem;
 }
 </style>

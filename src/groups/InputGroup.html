@@ -34,7 +34,6 @@ export default {
 <style>
 
 /* Correct flex behavior on mobile */
-/* @media screen and (max-width: 768px) { */
 .field.is-grouped {
   display: block;
 }
@@ -42,15 +41,17 @@ export default {
 .field.is-grouped .field-body {
   display: flex;
 }
-/* } */
 
 /* Correct label position in vertical layout */
 .field-label {
   text-align: left;
+  margin-bottom: .5em;
 }
 
 @media screen and (min-width: 769px) {
   .is-horizontal .field-label {
+    margin-bottom: 0;
+    padding-top: .375em;
     text-align: right;
   }
 

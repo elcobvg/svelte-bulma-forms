@@ -3,7 +3,11 @@ Bulma form components for [Svelte.js](https://svelte.technology/)
 
 These components offer a convenient way to build HTML forms, either in **Svelte** projects or in **plain JavaScript.**
 
-**NOTE:** this is still a work in progress
+**Features**
+
+* all form elements as defined in Bulma
+* built-in basic input validation, easily extendable
+* controls and fields emit events for your app to hook into
 
 #### Demo at http://svelte-bulma-forms.surge.sh/
 
