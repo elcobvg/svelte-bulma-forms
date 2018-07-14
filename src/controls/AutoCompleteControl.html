@@ -1,23 +1,21 @@
-<svelte:window on:click="handleClickOutside(event)" />
-
+<svelte:window on:click="close()" />
 <div on:click="event.stopPropagation()" 
     class="autocomplete control{iconLeft ? ' has-icons-left' : ''}{iconRight ? ' has-icons-right' : ''}">
   <input 
     class="input{stateClass}{sizeClass}{rounded ? ' is-rounded' : ''}" 
     type="text"
     {name}
-    {id}
     {placeholder}
     {required}
     {disabled}
     value="{value || ''}"
-    {readonly}
-    autocomplete="{placeholder}" 
+    autocomplete="{name}" 
     bind:value="search"
     on:input="onChange(event)"
     on:focus="fire('focus', event)"
     on:blur="fire('blur', event)"
     on:keydown="onKeyDown(event)"
+    ref:input
   >
 {#if iconLeft}
   <span class="icon is-small is-left">
@@ -29,22 +27,26 @@
     <i class="{iconRight}"></i>
   </span>
 {/if}
-
-
   <ul class="autocomplete-results{!isOpen ? ' hide-results' : ''}" ref:list>
-{#if isLoading}
-    <li class="loading">Loading results...</li>
-{:else}
-  {#each results as result, i}
-    <li on:click="setResult(result)" class="autocomplete-result{ i === arrowCounter ? ' is-active' : '' }">
-    {result}
+{#each results as result, i}
+    <li on:click="close(i)" class="autocomplete-result{ i === arrowCounter ? ' is-active' : '' }">
+    {@html result.label}
     </li>
-  {/each}
-{/if}
+{/each}
   </ul>
+{#if isLoading}
+  <slot>
+    <p class="fallback">Loading data...</p>
+  </slot>
+{/if}
 </div>
 
 <script>
+
+const regExpEscape = (s) => {
+  return s.replace(/[-\\^$*+?.()|[\]{}]/g, "\\$&")
+}
+
 export default {
   computed: {
     stateClass: ({ state }) => state ? ` is-${state}` : '',
@@ -52,99 +54,116 @@ export default {
   },
   data () {
     return {
-      type: 'text',
-      id: '',
       name: '',
       value: '',
       placeholder: '',
-      iconLeft: null,
-      iconRight: null,
-      state: null,
-      size: null,
       required: false,
       disabled: false,
-      readonly: false,
 
       // autocomplete props
       items: [],
-      isAsync: false,
       isOpen: false,
       results: [],
       search: '',
       isLoading: false,
-      arrowCounter: 0
+      arrowCounter: 0,
+
+      // options
+      class: '',
+      isAsync: false,
+      minChar: 1,
+      maxItems: 10,
+      fromStart: true, // Default type ahead
     }
   },
   methods: {
-    onChange (event) {
-      this.fire('input', event)
+    async onChange (event) {
+      const { isAsync, search, minChar } = this.get()
+      this.fire('input', search)
 
       // Is the data given by an outside ajax request?
       if (this.get().isAsync) {
-        this.set({ isLoading: true })
-      } else {
-        // Let's filter our flat array
+        this.set({ isLoading: true })        
+      } else if (search.length >= Number(minChar)) {
         this.filterResults()
         this.set({ isOpen: true })
       }
     },
     filterResults () {
-      // first capitalize all the things
-      const { items, search } = this.get()
-      const results = items.filter((item) => {
-        return item.toUpperCase().startsWith(search.toUpperCase())
+      const { items, search, fromStart, maxItems } = this.get()
+      const results = items.filter(item => {
+        if (typeof item !== 'string') {
+          item = item.key || '' // Silent fail
+        }
+        return fromStart ? item.toUpperCase().startsWith(search.toUpperCase()) 
+                         : item.toUpperCase().includes(search.toUpperCase())
+      })
+      .map(item => {
+        const text = typeof item !== 'string' ? item.key : item
+        return {
+          key: text,
+          value: item.value || item,
+          label: search.trim() === '' ? text : text.replace(RegExp(regExpEscape(search.trim()), 'i'), "<span>$&</span>")
+        }
       })
       this.set({ results })
-      const height = results.length > 10 ? 20 : results.length * 2
-      this.refs.list.style.height = `${height + 1}rem`
-    },
-    setResult (result) {
-      this.set({
-        search: result,
-        value: result,
-        isOpen: false
-      })
-      this.fire('change', result)
-    },
-    handleClickOutside (event) {
-      this.set({
-        isOpen: false,
-        arrowCounter: -1
-      })
+
+      const height = results.length > maxItems ? maxItems : results.length
+      this.refs.list.style.height = `${height * 2.25}rem`
     },
     onKeyDown (event) {
-      const { arrowCounter, results } = this.get()
+      let { arrowCounter, results } = this.get()
 
-      if (event.key === 'ArrowDown') {
-        if (arrowCounter < results.length) {
-          this.set({ arrowCounter: arrowCounter + 1 })
+      if (event.keyCode === 40 && arrowCounter < results.length) {
+        // ArrowDown
+        this.set({ arrowCounter: arrowCounter + 1 })
+      } else if (event.keyCode === 38 && arrowCounter > 0) {
+        // ArrowUp
+        this.set({ arrowCounter: arrowCounter - 1 })
+      } else if (event.keyCode === 13) {
+        // Enter
+        event.preventDefault()
+        if (arrowCounter === -1) {
+          arrowCounter = 0 // Default select first item of list
         }
-      } else if (event.key === 'ArrowUp') {
-        if (arrowCounter > 0) {
-          this.set({ arrowCounter: arrowCounter - 1 })
-        }
-      } else if (event.key === 'Enter') {
-        event.stopPropagation()
-        this.set({
-          search: results[arrowCounter],
-          isOpen: false,
-          arrowCounter: -1
-        })
+        this.close(arrowCounter)
+      } else if (event.keyCode === 27) {
+        // Escape
+        event.preventDefault()
+        this.close()
       }
+    },
+    close (index = -1) {
+      if (index > -1) {
+        const { results } = this.get()
+        const { key, value } = results[index]
+        this.fire('change', value)
+        this.set({ value, search: key })
+      } else if (!this.get().value) {
+        this.set({ search: '' })
+      }
+      this.set({ isOpen: false, arrowCounter: -1 })
+      this.refs.input.blur()
     }
   },
-  onupdate ({ changed, current, previous }) {
-    if (changed.items && previous && current.items.length !== previous.items.length) {
+  onupdate ({ changed, current }) {
+    if (this.get().isAsync && changed.items && current.items.length) {
       this.set({
-        results: current.items,
-        isLoading: false
+        items: current.items,
+        isLoading: false,
+        isOpen: true
       })
+      this.filterResults()
     }
   }
 }
 </script>
 
 <style>
+  * {
+    box-sizing: border-box;
+  }
+
   .autocomplete {
     position: relative;
   }
@@ -157,7 +176,7 @@ export default {
     padding: 0;
     margin: 0;
     border: 1px solid #dbdbdb;
-    height: 4.5rem;
+    height: 6rem;
     overflow: auto;
     width: 100%;
 
@@ -168,15 +187,22 @@ export default {
   }
 
   .autocomplete-result {
+    color: #7a7a7a;
     list-style: none;
     text-align: left;
+    height: 2rem;
     padding: 0.25rem 0.5rem;
     cursor: pointer;
+  }
+
+  .autocomplete-result > :global(span) {
+    background-color: none;
+    color: #242424;
+    font-weight: bold;
   }
 
   .autocomplete-result.is-active,
   .autocomplete-result:hover {
     background-color: #dbdbdb;
   }
-
 </style>
