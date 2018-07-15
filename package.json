@@ -1,6 +1,6 @@
 {
   "name": "svelte-bulma-forms",
-  "description": "svelte-bulma-forms",
+  "description": "Bulma form components for Svelte.js",
   "version": "0.0.10",
   "repository": {
     "type": "git",
