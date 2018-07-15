@@ -23,6 +23,8 @@
           {value}
           {rounded}
           {readonly}
+          {isAsync}
+          on:input="fire('input', event)"
           on:change="changeValue(event)"
           on:focus="set({ hasFocus: true })"
           on:blur="set({ hasFocus: false })"
@@ -51,6 +53,8 @@
         {value}
         {rounded}
         {readonly}
+        {isAsync}
+        on:input="fire('input', event)"
         on:change="changeValue(event)"
         on:focus="set({ hasFocus: true })"
         on:blur="set({ hasFocus: false })"
@@ -83,6 +87,8 @@
       {value}
       {rounded}
       {readonly}
+      {isAsync}
+      on:input="fire('input', event)"
       on:change="changeValue(event)"
       on:focus="set({ hasFocus: true })"
       on:blur="set({ hasFocus: false })"
