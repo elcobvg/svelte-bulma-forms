@@ -77,6 +77,7 @@ require('/path/to/node_modules/font-awesome/css/font-awesome.min.css')
 - `EmailField`
 - `FileField`
 - `PasswordField`
+- `PasswordMaskField`
 - `SelectField`
 - `TextareaField`
 - `TextField`

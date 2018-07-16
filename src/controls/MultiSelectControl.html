@@ -1,5 +1,5 @@
-<div class="control">
-  <div class="select is-multiple{stateClass}{sizeClass}">
+<div class="control{expandClass}">
+  <div class="select is-multiple{stateClass}{sizeClass}{expanded ? ' is-fullwidth' : ''}">
     <select {name} {id} {disabled} multiple bind:value="value" on:change="fire('change', value)">
       <slot><!-- options are injected here --></slot>
     </select>
@@ -7,10 +7,13 @@
 </div>
 
 <script>
+import { expandClass, sizeClass, stateClass } from '../helpers'
+
 export default {
   computed: {
-    stateClass: ({ state }) => state ? ` is-${state}` : '',
-    sizeClass: ({ size }) => size ? ` is-${size}` : ''
+    expandClass: ({ expanded }) => expandClass(expanded),
+    sizeClass: ({ size }) => sizeClass(size),
+    stateClass: ({ state }) => stateClass(state)
   },
   data () {
     return {

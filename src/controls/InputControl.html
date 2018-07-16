@@ -1,4 +1,4 @@
-<div class="control{iconLeft ? ' has-icons-left' : ''}{iconRight ? ' has-icons-right' : ''}">
+<div class="control{expandClass}{iconLeft ? ' has-icons-left' : ''}{iconRight ? ' has-icons-right' : ''}">
   <input 
     class="input{stateClass}{sizeClass}{rounded ? ' is-rounded' : ''}" 
     id="{_id}"
@@ -26,12 +26,14 @@
 
 <script>
 import uuid from 'random-uuid-v4'
+import { expandClass, sizeClass, stateClass } from '../helpers'
 
 export default {
   computed: {
     _id: ({ id }) => id || uuid(),
-    stateClass: ({ state }) => state ? ` is-${state}` : '',
-    sizeClass: ({ size }) => size ? ` is-${size}` : ''
+    expandClass: ({ expanded }) => expandClass(expanded),
+    sizeClass: ({ size }) => sizeClass(size),
+    stateClass: ({ state }) => stateClass(state)
   },
   data () {
     return {

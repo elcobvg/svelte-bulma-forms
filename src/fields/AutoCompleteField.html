@@ -20,11 +20,10 @@
           {size}
           {required}
           {disabled}
+          {expanded}
           {value}
           {rounded}
           {readonly}
-          {isAsync}
-          on:input="fire('input', event)"
           on:change="changeValue(event)"
           on:focus="set({ hasFocus: true })"
           on:blur="set({ hasFocus: false })"
@@ -50,11 +49,10 @@
         {size}
         {required}
         {disabled}
+        {expanded}
         {value}
         {rounded}
         {readonly}
-        {isAsync}
-        on:input="fire('input', event)"
         on:change="changeValue(event)"
         on:focus="set({ hasFocus: true })"
         on:blur="set({ hasFocus: false })"
@@ -84,11 +82,10 @@
       {size}
       {required}
       {disabled}
+      {expanded}
       {value}
       {rounded}
       {readonly}
-      {isAsync}
-      on:input="fire('input', event)"
       on:change="changeValue(event)"
       on:focus="set({ hasFocus: true })"
       on:blur="set({ hasFocus: false })"
@@ -121,6 +118,7 @@ export default {
       _validate: {},
       addon: null,
       disabled: false,
+      expanded: false,
       hasFocus: false,
       help: '',
       horizontal: false,

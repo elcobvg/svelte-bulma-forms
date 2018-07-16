@@ -1,6 +1,6 @@
 <svelte:window on:click="close()" />
 <div on:click="event.stopPropagation()" 
-    class="autocomplete control{iconLeft ? ' has-icons-left' : ''}{iconRight ? ' has-icons-right' : ''}">
+    class="autocomplete control{expandClass}{iconLeft ? ' has-icons-left' : ''}{iconRight ? ' has-icons-right' : ''}">
   <input 
     class="input{stateClass}{sizeClass}{rounded ? ' is-rounded' : ''}" 
     type="text"
@@ -10,7 +10,7 @@
     {required}
     {disabled}
     value="{value || ''}"
-    autocomplete="new-password" 
+    autocomplete="{name}" 
     bind:value="search"
     on:input="onChange(event)"
     on:focus="fire('focus', event)"
@@ -43,6 +43,7 @@
 </div>
 
 <script>
+import { expandClass, sizeClass, stateClass } from '../helpers'
 
 const regExpEscape = (s) => {
   return s.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&')
@@ -50,8 +51,9 @@ const regExpEscape = (s) => {
 
 export default {
   computed: {
-    stateClass: ({ state }) => state ? ` is-${state}` : '',
-    sizeClass: ({ size }) => size ? ` is-${size}` : ''
+    expandClass: ({ expanded }) => expandClass(expanded),
+    sizeClass: ({ size }) => sizeClass(size),
+    stateClass: ({ state }) => stateClass(state)
   },
   data () {
     return {

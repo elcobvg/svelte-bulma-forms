@@ -26,10 +26,12 @@
 {/if}
 
 <script>
+import { sizeClass, stateClass } from '../helpers'
+
 export default {
   computed: {
-    sizeClass: ({ size }) => size ? ` is-${size}` : '',
-    stateClass: ({ state }) => state ? ` is-${state}` : ''
+    sizeClass: ({ size }) => sizeClass(size),
+    stateClass: ({ state }) => stateClass(state)
   },
   data () {
     return {

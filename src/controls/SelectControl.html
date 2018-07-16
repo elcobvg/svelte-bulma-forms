@@ -1,5 +1,5 @@
-<div class="control{iconLeft ? ' has-icons-left' : ''}">
-  <span class="select{stateClass}{sizeClass}">
+<div class="control{expandClass}{iconLeft ? ' has-icons-left' : ''}">
+  <span class="select{stateClass}{sizeClass}{expanded ? ' is-fullwidth' : ''}">
     <select {name} {id} {disabled} bind:value="value" on:change="fire('change', value)">
       <slot><!-- options are injected here --></slot>
     </select>
@@ -12,10 +12,13 @@
 </div>
 
 <script>
+import { expandClass, sizeClass, stateClass } from '../helpers'
+
 export default {
   computed: {
-    stateClass: ({ state }) => state ? ` is-${state}` : '',
-    sizeClass: ({ size }) => size ? ` is-${size}` : ''
+    expandClass: ({ expanded }) => expandClass(expanded),
+    sizeClass: ({ size }) => sizeClass(size),
+    stateClass: ({ state }) => stateClass(state)
   },
   data () {
     return {

@@ -11,10 +11,12 @@
 </div>
 
 <script>
+import { sizeClass, stateClass } from '../helpers'
+
 export default {
   computed: {
-    stateClass: ({ state }) => state ? ` is-${state}` : '',
-    sizeClass: ({ size }) => size ? ` is-${size}` : ''
+    sizeClass: ({ size }) => sizeClass(size),
+    stateClass: ({ state }) => stateClass(state)
   },
   data () {
     return {

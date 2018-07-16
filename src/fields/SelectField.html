@@ -15,6 +15,7 @@
         {size}
         {required}
         {disabled}
+        {expanded}
         {value}
         bind:value="value"
         on:change="changeValue(event)"
@@ -30,6 +31,7 @@
         {size}
         {required}
         {disabled}
+        {expanded}
         {value}
         bind:value="value"
         on:change="changeValue(event)"
@@ -60,6 +62,7 @@
     {size}
     {required}
     {disabled}
+    {expanded}
     {value}
     bind:value="value"
     on:change="changeValue(event)"
@@ -75,6 +78,7 @@
     {size}
     {required}
     {disabled}
+    {expanded}
     {value}
     bind:value="value"
     on:change="changeValue(event)"
@@ -111,6 +115,7 @@ export default {
       _validate: {},
       addon: null,
       disabled: false,
+      expanded: false,
       help: '',
       horizontal: null,
       iconLeft: null,
@@ -134,7 +139,9 @@ export default {
     }
   },
   oncreate () {
-    this.set({ addon: !!this.options.slots })
+    if (this.options.slots && this.options.slots.addon) {
+      this.set({ addon: true })
+    }
   }
 }
 </script>

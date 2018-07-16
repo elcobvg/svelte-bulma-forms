@@ -3,14 +3,16 @@
     class="button{stateClass}{sizeClass}" 
     {type} 
     on:click="fire('click', event)"
-  >{name}</button>
+  ><slot></slot>{name}</button>
 </div>
 
 <script>
+import { sizeClass, stateClass } from '../helpers'
+
 export default {
   computed: {
-    stateClass: ({ state }) => state ? ` is-${state}` : '',
-    sizeClass: ({ size }) => size ? ` is-${size}` : ''
+    sizeClass: ({ size }) => sizeClass(size),
+    stateClass: ({ state }) => stateClass(state)
   },
   data () {
     return {

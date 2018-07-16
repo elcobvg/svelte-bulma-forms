@@ -130,6 +130,23 @@ Identical to `TextField` (see below)
 
 Identical to `TextField` (see below)
 
+## PasswordMask
+
+Variant of of `PasswordField` with clickable icon to mask/unmask the password input.
+
+### Markup
+
+```html
+<PasswordMaskField name="password" label="Password" horizontal required />
+```
+### Props
+
+Identical to `PasswordField ` (see above)
+
+### Slots
+
+None.
+
 
 ## Select
 
@@ -152,6 +169,7 @@ Identical to `TextField` (see below)
 | state | String | - | false | color setting
 | size | String | - | false | control size
 | iconLeft | String | - | false | optional font-awesome icon
+| expanded | Boolean | false | false | full width when using addon
 | multiple | Boolean | false | false | multiple or single select
 | horizontal | Boolean | false | false | horizontal form layout
 | required | Boolean | false | false | require input field
@@ -188,6 +206,7 @@ Identical to `TextField` (see below)
 | help | String | - | false | optional help text
 | iconLeft | String | - | false | optional font-awesome icon
 | iconRight | String | - | false | optional font-awesome icon
+| expanded | Boolean | false | false | full width when using addon
 | placeholder | String | - | false | optional text
 | horizontal | Boolean | false | false | horizontal form layout
 | required | Boolean | false | false | require input field

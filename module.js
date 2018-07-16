@@ -5,6 +5,7 @@ export {
   EmailField,
   FileField,
   PasswordField,
+  PasswordMaskField,
   SelectField,
   TextareaField,
   TextField,
