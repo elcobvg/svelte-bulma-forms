@@ -1,12 +1,11 @@
-{#if horizontal}
-<div class="field is-horizontal{addon ? ' has-addons' : ''}">
+<div class="field{horizontal ? ' is-horizontal' : ''}">
   <div class="field-label is-normal">
 {#if label}
     <FieldLabel {id} {size} {required} {label} />
 {/if}
   </div>
   <div class="field-body">
-    <div class="field">
+    <div class="field{addon ? ' has-addons' : ''}">
 {#if multiple}
       <MultiSelectControl 
         {name}
@@ -42,58 +41,12 @@
 {#if addon}
       <slot name="addon"><!-- addon is injected here --></slot>
 {/if}
-{#if help}
+{#if help && !addon}
       <p class="help{stateClass}">{help}</p>
 {/if}
     </div>
   </div>
 </div>
-
-{:else}
-<div class="field{addon ? ' has-addons' : ''}">
-{#if label}
-  <FieldLabel {id} {size} {required} {label} />
-{/if}
-{#if multiple}
-  <MultiSelectControl 
-    {name}
-    {id}
-    {state}
-    {size}
-    {required}
-    {disabled}
-    {expanded}
-    {value}
-    bind:value="value"
-    on:change="changeValue(event)"
-  >
-    <slot><!-- options are injected here --></slot>
-  </MultiSelectControl>
-{:else}
-  <SelectControl 
-    {name}
-    {id}
-    {iconLeft}
-    {state}
-    {size}
-    {required}
-    {disabled}
-    {expanded}
-    {value}
-    bind:value="value"
-    on:change="changeValue(event)"
-  >
-    <slot><!-- options are injected here --></slot>
-  </SelectControl>
-{/if}
-{#if addon}
-  <slot name="addon"><!-- addon is injected here --></slot>
-{/if}
-{#if help}
-  <p class="help{stateClass}">{help}</p>
-{/if}
-</div>
-{/if}
 
 <script>
 import { id, stateClass } from '../helpers'
@@ -148,27 +101,23 @@ export default {
 
 <style>
 
-/* Correct label position with addons in vertical layout */
-.field.has-addons {
+/* Correct label position in vertical layout */
+.field-label {
+  text-align: left;
+  margin-bottom: .5em;
+}
+
+@media screen and (min-width: 769px) {
+  .is-horizontal .field-label {
+    margin-bottom: 0;
+    padding-top: .375em;
+    text-align: right;
+  }
+}
+
+.has-addons .help {
   display: block;
-}
-
-.field.is-horizontal.has-addons,
-.field.has-addons .has-addons {
-  display: flex;
-  justify-content: flex-start;
-}
-
-/* Correct label position with addons on mobile horizontal */
-@media screen and (max-width: 768px) {
-  .field.is-horizontal.has-addons {
-    display: block;
-  }
-
-  .field.is-horizontal.has-addons .field.has-addons {
-    display: flex;
-    justify-content: flex-start;
-  }
+  float: left;
 }
 
 </style>
