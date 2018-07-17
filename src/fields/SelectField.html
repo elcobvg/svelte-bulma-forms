@@ -41,10 +41,10 @@
 {#if addon}
       <slot name="addon"><!-- addon is injected here --></slot>
 {/if}
-{#if help && !addon}
+    </div>
+{#if help}
       <p class="help{stateClass}">{help}</p>
 {/if}
-    </div>
   </div>
 </div>
 
@@ -100,11 +100,14 @@ export default {
 </script>
 
 <style>
-
-/* Correct label position in vertical layout */
+/* Correct label & help text position */
 .field-label {
   text-align: left;
   margin-bottom: .5em;
+}
+
+.help {
+  margin-top: -.5rem;
 }
 
 @media screen and (min-width: 769px) {
@@ -113,11 +116,18 @@ export default {
     padding-top: .375em;
     text-align: right;
   }
-}
 
-.has-addons .help {
-  display: block;
-  float: left;
-}
+  .field-body {
+    flex-wrap: wrap;
+  }
 
+  .field-body .field {
+    margin-right: 0;
+    width: 100%;
+  }
+
+  .help {
+    margin-top: .25rem;
+  }
+}
 </style>

@@ -1,25 +1,27 @@
 <div class="control">
   <button 
-    class="button{stateClass}{sizeClass}" 
+    class="button{stateClass}{sizeClass}{staticClass}" 
     {type} 
     on:click="fire('click', event)"
   ><slot></slot>{name}</button>
 </div>
 
 <script>
-import { sizeClass, stateClass } from '../helpers'
+import { sizeClass, stateClass, staticClass } from '../helpers'
 
 export default {
   computed: {
     sizeClass: ({ size }) => sizeClass(size),
-    stateClass: ({ state }) => stateClass(state)
+    stateClass: ({ state }) => stateClass(state),
+    staticClass: ({ disabled }) => staticClass(disabled)
   },
   data () {
     return {
       type: 'submit',
       name: '',
       state: '',
-      size: ''
+      size: '',
+      disabled: false,
     }
   }
 }

@@ -58,12 +58,14 @@ For including styles, you can either place the below styles in the `<head>` of y
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 ````
 
-Or you can import it to your webpack/rollup entry point:
+Or you can import them to your webpack/rollup entry point:
 
 ````javascript
 require('/path/to/node_modules/bulma/css/bulma.min.css')
 require('/path/to/node_modules/font-awesome/css/font-awesome.min.css')
 ````
+
+**Note that you'll have to install** `bulma` **and** `font-awesome` **first**
 
 ## Available elements
 

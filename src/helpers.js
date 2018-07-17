@@ -6,4 +6,6 @@ export const stateClass = state => state ? ` is-${state}` : ''
 
 export const sizeClass = size => size ? ` is-${size}` : ''
 
+export const staticClass = disabled => disabled ? ` is-static` : ''
+
 export const expandClass = expanded => expanded ? ` is-expanded` : ''

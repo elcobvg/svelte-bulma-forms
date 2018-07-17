@@ -1,41 +1,11 @@
-{#if horizontal}
-<div class="field  is-horizontal{addon ? ' has-addons' : ''}">
+<div class="field{horizontal ? ' is-horizontal' : ''}">
   <div class="field-label is-normal">
 {#if label}
     <FieldLabel {id} {size} {required} {label} />
 {/if}
   </div>
-{#if addon}
   <div class="field-body">
-    <div class="field is-expanded">
-      <div class="field has-addons">
-        <InputControl 
-          {type}
-          {name}
-          {id}
-          {placeholder}
-          {iconLeft}
-          {iconRight}
-          {state}
-          {size}
-          {required}
-          {disabled}
-          {expanded}
-          {value}
-          {rounded}
-          {readonly}
-          on:change="changeValue(event)"
-        />
-        <slot><!-- addon is injected here --></slot>
-      </div>
-{#if help}
-      <p class="help{stateClass}">{help}</p>
-{/if}
-    </div>
-  </div>
-{:else}
-  <div class="field-body">
-    <div class="field">
+    <div class="field{addon ? ' has-addons' : ''}">
       <InputControl 
         {type}
         {name}
@@ -53,44 +23,16 @@
         {readonly}
         on:change="changeValue(event)"
       />
+{#if addon}
+      <slot><!-- addon is injected here --></slot>
+{/if}
+    </div>
 {#if help}
       <p class="help{stateClass}">{help}</p>
 {/if}
-    </div>
   </div>
-{/if}
 </div>
 
-{:else}
-<div class="field{addon ? ' has-addons' : ''}">
-{#if label}
-  <FieldLabel {id} {size} {required} {label} />
-{/if}
-  <div class="has-addons">
-    <InputControl 
-      {type}
-      {name}
-      {id}
-      {placeholder}
-      {iconLeft}
-      {iconRight}
-      {state}
-      {size}
-      {required}
-      {disabled}
-      {expanded}
-      {value}
-      {rounded}
-      {readonly}
-      on:change="changeValue(event)"
-    />
-    <slot><!-- addon is injected here --></slot>
-  </div>
-{#if help}
-  <p class="help{stateClass}">{help}</p>
-{/if}
-</div>
-{/if}
 
 <script>
 import { id, stateClass } from '../helpers'
@@ -114,28 +56,34 @@ export default {
 </script>
 
 <style>
-
-/* Correct label position with addons in vertical layout */
-.field.has-addons {
-  display: block;
+/* Correct label & help text position */
+.field-label {
+  text-align: left;
+  margin-bottom: .5em;
 }
 
-.field.is-horizontal.has-addons,
-.field.has-addons .has-addons {
-  display: flex;
-  justify-content: flex-start;
+.help {
+  margin-top: -.5rem;
 }
 
-/* Correct label position with addons on mobile horizontal */
-@media screen and (max-width: 768px) {
-  .field.is-horizontal.has-addons {
-    display: block;
+@media screen and (min-width: 769px) {
+  .is-horizontal .field-label {
+    margin-bottom: 0;
+    padding-top: .375em;
+    text-align: right;
   }
 
-  .field.is-horizontal.has-addons .field.has-addons {
-    display: flex;
-    justify-content: flex-start;
+  .field-body {
+    flex-wrap: wrap;
+  }
+
+  .field-body .field {
+    margin-right: 0;
+    width: 100%;
+  }
+
+  .help {
+    margin-top: .25rem;
   }
 }
-
 </style>
