@@ -32,7 +32,7 @@ export default {
     TextField,
     DateField,
     EmailField,
-	...
+  ...
   }
 }
 ````
@@ -141,6 +141,10 @@ const emailInput = new EmailField({
   }
 })
 ````
+### See also
+
+- https://github.com/elcobvg/svelte-bulma-components a collection of Bulma UI components
+- https://github.com/elcobvg/svelte-autocomplete lightweight autocomplete component, without the Bulma styling
 
 ### Reference
 
