@@ -18,7 +18,8 @@ export default {
   methods: {
     changeValue (event) {
       const { checkbox } = this.refs
-      this.fire('change', checkbox.checked)
+      const { value } = this.get()
+      this.fire('change', checkbox.checked ? value : false)
     }
   }
 }
